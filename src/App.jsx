@@ -1,45 +1,5 @@
 import React, { useState, useEffect } from 'react';
 
-/*
-* IMPORTANT: For this component to render correctly, please add the following
-* lines to the <head> section of your main index.html file.
-*
-* <!-- Tailwind CSS -->
-* <script src="https://cdn.tailwindcss.com"></script>
-*
-* <!-- Google Fonts -->
-* <link rel="preconnect" href="https://fonts.googleapis.com" />
-* <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
-* <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
-*
-* <!-- Font Awesome for Icons -->
-* <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-*
-* <!-- Custom Styles -->
-* <style>
-* @font-face {
-* font-family: 'Modo Badoni';
-* src: url('https://fonts.cdnfonts.com/s/72225/ModaBadoni-LightItalic.woff') format('woff');
-* font-weight: 300;
-* font-style: italic;
-* }
-* @font-face {
-* font-family: 'Modo Badoni';
-* src: url('https://fonts.cdnfonts.com/s/72225/ModaBadoni-ExtraBold.woff') format('woff');
-* font-weight: 800;
-* font-style: normal;
-* }
-* body { margin: 0; font-family: 'Raleway', sans-serif; }
-* .animate-fade-in { animation: fadeIn 1s ease-in-out; }
-* .animate-slide-up { animation: slideUp 1s ease-in-out; }
-* .animate-fade-in-delay-1 { animation: fadeIn 1s ease-in-out 0.5s forwards; opacity: 0; }
-* .animate-pulse-once { animation: pulseOnce 1.5s ease-in-out; }
-* @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-* @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-* @keyframes pulseOnce { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
-* </style>
-*/
-
 const lightColors = {
   primary: '#91A8CE',
   secondary: '#04315F',
@@ -778,7 +738,7 @@ const ContactPage = ({ colors }) => (
       <h2 className="text-2xl font-bold mb-4" style={{ fontFamily: 'Modo Badoni', color: colors.secondary }}>Our Location</h2>
       <div className="rounded-xl overflow-hidden w-full max-w-lg mx-auto shadow-lg">
         <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.081831405179!2d77.5939794148419!3d12.96695679085816!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae16769992d95b%3A0xb3637172023d04e5!2sSt.%20Joseph's%20Pre-University%20College!5e0!3m2!1sen!2sin!4v1638276685000!5m2!1sen!2sin"
+          src="https://www.google.com/maps/embed?pb=!1m18!m12!1m3!1d3888.081831405179!2d77.5939794148419!3d12.96695679085816!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae16769992d95b%3A0xb3637172023d04e5!2sSt.%20Joseph's%20Pre-University%20College!5e0!3m2!1sen!2sin!4v1638276685000!5m2!1sen!2sin"
           width="100%"
           height="450"
           style={{ border: 0 }}
@@ -797,7 +757,107 @@ const App = () => {
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [registrationData, setRegistrationData] = useState(null);
   const [isDarkTheme, setIsDarkTheme] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const currentColors = isDarkTheme ? darkColors : lightColors;
+
+  useEffect(() => {
+    const promises = [];
+
+    // Tailwind CSS
+    if (!document.getElementById('tailwind-script')) {
+      promises.push(new Promise((resolve) => {
+        const script = document.createElement('script');
+        script.id = 'tailwind-script';
+        script.src = 'https://cdn.tailwindcss.com';
+        script.onload = resolve;
+        script.onerror = resolve; // Resolve even on error to not block forever
+        document.head.appendChild(script);
+      }));
+    }
+
+    // Font Awesome
+    if (!document.getElementById('fontawesome-link')) {
+        const link = document.createElement('link');
+        link.id = 'fontawesome-link';
+        link.rel = 'stylesheet';
+        link.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css';
+        document.head.appendChild(link);
+    }
+
+    // Google Fonts
+    if (!document.getElementById('google-fonts-main')) {
+      promises.push(new Promise((resolve) => {
+        const link = document.createElement('link');
+        link.id = 'google-fonts-main';
+        link.rel = 'stylesheet';
+        link.href = "https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap";
+        link.onload = resolve;
+        link.onerror = resolve;
+        document.head.appendChild(link);
+      }));
+    }
+
+    // Custom Styles
+    if (!document.getElementById('custom-styles')) {
+      const style = document.createElement('style');
+      style.id = 'custom-styles';
+      style.innerHTML = `
+        @font-face {
+          font-family: 'Modo Badoni';
+          src: url('https://fonts.cdnfonts.com/s/72225/ModaBadoni-LightItalic.woff') format('woff');
+          font-weight: 300;
+          font-style: italic;
+        }
+        @font-face {
+          font-family: 'Modo Badoni';
+          src: url('https://fonts.cdnfonts.com/s/72225/ModaBadoni-ExtraBold.woff') format('woff');
+          font-weight: 800;
+          font-style: normal;
+        }
+        html, body {
+          margin: 0;
+          padding: 0;
+          font-family: 'Raleway', sans-serif;
+          width: 100%;
+          overflow-x: hidden;
+        }
+        .animate-fade-in { animation: fadeIn 1s ease-in-out; }
+        .animate-slide-up { animation: slideUp 1s ease-in-out; }
+        .animate-fade-in-delay-1 { animation: fadeIn 1s ease-in-out 0.5s forwards; opacity: 0; }
+        .animate-pulse-once { animation: pulseOnce 1.5s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        @keyframes pulseOnce { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+      `;
+      document.head.appendChild(style);
+    }
+    
+    // Google Fonts Preconnect links (don't need to be awaited)
+    if (!document.getElementById('google-fonts-preconnect1')) {
+        const link = document.createElement('link');
+        link.id = 'google-fonts-preconnect1';
+        link.rel = 'preconnect';
+        link.href = 'https://fonts.googleapis.com';
+        document.head.appendChild(link);
+    }
+    if (!document.getElementById('google-fonts-preconnect2')) {
+        const link = document.createElement('link');
+        link.id = 'google-fonts-preconnect2';
+        link.rel = 'preconnect';
+        link.href = 'https://fonts.gstatic.com';
+        link.crossOrigin = 'true';
+        document.head.appendChild(link);
+    }
+
+    Promise.all(promises).then(() => {
+        setTimeout(() => setIsLoading(false), 300); // Small delay for Tailwind to initialize
+    });
+
+    const fallbackTimeout = setTimeout(() => setIsLoading(false), 2500);
+    return () => clearTimeout(fallbackTimeout);
+
+  }, []);
+
 
   useEffect(() => {
     if (registrationData) {
@@ -813,9 +873,28 @@ const App = () => {
     }
   }, [registrationData]);
 
+  if (isLoading) {
+    return (
+      <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          height: '100vh',
+          width: '100vw',
+          backgroundColor: '#FFFBFA',
+          color: '#04315F',
+          fontFamily: 'Modo Badoni',
+          fontSize: 'clamp(2rem, 10vw, 4rem)',
+          textAlign: 'center',
+          padding: '1rem'
+      }}>
+        <h1>Loading EQUINOX...</h1>
+      </div>
+    );
+  }
 
   return (
-    <div className="font-sans flex flex-col min-h-screen">
+    <div className="font-sans flex flex-col min-h-screen w-screen overflow-x-hidden">
       {/* Navigation */}
       <nav
         className="sticky top-0 left-0 right-0 z-50 p-4 sm:p-6 flex justify-between backdrop-blur-sm transition-all duration-300"
