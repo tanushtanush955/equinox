@@ -504,6 +504,17 @@ const InstitutionalRegistrationPage = ({ setActivePage, setMessage, colors, init
     }
   };
   
+  const removeTeam = (formIndex, teamIndex) => {
+    const newForms = [...registrationForms];
+    newForms[formIndex].teams.splice(teamIndex, 1);
+    // Re-assign team names to be sequential after removal
+    newForms[formIndex].teams = newForms[formIndex].teams.map((team, index) => ({
+      ...team,
+      teamName: `Team ${index + 1}`
+    }));
+    setRegistrationForms(newForms);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const uid = crypto.randomUUID();
@@ -579,7 +590,18 @@ const InstitutionalRegistrationPage = ({ setActivePage, setMessage, colors, init
                   <h2 className="text-xl sm:text-2xl font-semibold mb-4" style={{ fontFamily: 'Modo Badoni' }}>{form.eventName}</h2>
                   {form.teams.map((team, teamIndex) => (
                     <div key={teamIndex} className="mb-6 p-4 rounded-lg" style={{ backgroundColor: colors.tertiary, color: colors.secondary, border: `2px dashed ${colors.secondary}` }}>
-                      <h3 className="text-lg font-semibold mb-2" style={{ fontFamily: 'Libre Baskerville' }}>{team.teamName}</h3>
+                      <div className="flex justify-between items-center mb-2">
+                        <h3 className="text-lg font-semibold" style={{ fontFamily: 'Libre Baskerville' }}>{team.teamName}</h3>
+                        {form.teams.length > 1 && (
+                          <button
+                            type="button"
+                            onClick={() => removeTeam(formIndex, teamIndex)}
+                            className="px-3 py-1 text-xs font-bold rounded-full text-red-500 border border-red-500 hover:bg-red-500 hover:text-white transition-colors"
+                          >
+                            Remove
+                          </button>
+                        )}
+                      </div>
                       <div className="space-y-4">
                         {team.participants.map((participant, participantIndex) => (
                           <div key={participantIndex} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -898,3 +920,4 @@ window.onload = function() {
     container._reactRoot = root;
   }
 };
+
