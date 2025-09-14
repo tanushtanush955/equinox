@@ -25,7 +25,7 @@ const ContactPage = ({ colors }) => (
 	  <h2 className="text-2xl font-bold mb-4" style={{ fontFamily: 'Modo Badoni', color: colors.secondary }}>Our Location</h2>
 	  <div className="rounded-xl overflow-hidden w-full max-w-lg mx-auto shadow-lg">
 		<iframe
-		  src="https://www.google.com/maps/embed?pb=!1m18!m12!1m3!1d3888.081831405179!2d77.5939794148419!3d12.96695679085816!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae16769992d95b%3A0xb3637172023d04e5!2sSt.%20Joseph's%20Pre-University%20College!5e0!3m2!1sen!2sin!4v1638276685000!5m2!1sen!2sin"
+		  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d972.0013476717678!2d77.60342998594393!3d12.971506648219824!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1680c9df9f8b%3A0x611a28067d796a0a!2sSt.%20Joseph&#39;s%20Pu%20College!5e0!3m2!1sen!2sin!4v1757862318871!5m2!1sen!2sin"
 		  width="100%"
 		  height="450"
 		  style={{ border: 0 }}
