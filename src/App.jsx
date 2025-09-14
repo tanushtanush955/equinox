@@ -373,11 +373,11 @@ const IndividualRegistrationPage = ({ setActivePage, setMessage, colors }) => {
                     />
                   </div>
                   <div className="flex flex-col">
-                    <label className="text-sm sm:text-base font-medium mb-1" style={{ fontFamily: 'Raleway' }}>Email</label>
+                    <label className="text-sm sm:text-base font-medium mb-1" style={{ fontFamily: 'Raleway' }}>Reg. No</label>
                     <input
-                      type="email"
-                      name="email"
-                      value={participant.email}
+                      type="text"
+                      name="reg_no"
+                      value={participant.reg_no}
                       onChange={(e) => handleInputChange(index, e)}
                       className="p-2 sm:p-3 rounded-lg border-2"
                       style={{ borderColor: colors.secondary, color: colors.text, backgroundColor: colors.tertiary }}
@@ -411,7 +411,7 @@ const IndividualRegistrationPage = ({ setActivePage, setMessage, colors }) => {
 const InstitutionalRegistrationPage = ({ setActivePage, setMessage, colors, initialData }) => {
   const [schoolName, setSchoolName] = useState(initialData?.schoolName || '');
   const [selectedEvents, setSelectedEvents] = useState(initialData?.registrationForms.map(f => f.eventName) || []);
-  const [headDelegate, setHeadDelegate] = useState(initialData?.headDelegate || { name: '', email: '', reg_no: '' });
+  const [headDelegate, setHeadDelegate] = useState(initialData?.headDelegate || { name: '', phone: '', reg_no: '' });
   const [registrationForms, setRegistrationForms] = useState(initialData?.registrationForms || []);
 
   const allEvents = eventsData.flatMap(category => category.events);
@@ -444,7 +444,7 @@ const InstitutionalRegistrationPage = ({ setActivePage, setMessage, colors, init
         num_participants: eventDetails.num_participants,
         teams: [{
           teamName: `Team 1`,
-          participants: Array.from({ length: eventDetails.num_participants }, () => ({ name: '', email: '', reg_no: '' }))
+          participants: Array.from({ length: eventDetails.num_participants }, () => ({ name: '', phone: '', reg_no: '' }))
         }]
       };
     });
@@ -484,7 +484,7 @@ const InstitutionalRegistrationPage = ({ setActivePage, setMessage, colors, init
     if (newForms[formIndex].teams.length < eventDetails.num_teams) {
       newForms[formIndex].teams.push({
         teamName: `Team ${newForms[formIndex].teams.length + 1}`,
-        participants: Array.from({ length: eventDetails.num_participants }, () => ({ name: '', email: '', reg_no: '' }))
+        participants: Array.from({ length: eventDetails.num_participants }, () => ({ name: '', phone: '', reg_no: '' }))
       });
       setRegistrationForms(newForms);
     } else {
@@ -525,7 +525,7 @@ const InstitutionalRegistrationPage = ({ setActivePage, setMessage, colors, init
             <h3 className="text-sm sm:text-base font-medium mt-4 mb-2" style={{ fontFamily: 'Raleway' }}>Head Delegate Details</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               <input type="text" name="name" placeholder="Name" value={headDelegate.name} onChange={handleHeadDelegateChange} className="p-2 rounded-lg border-2" style={{ borderColor: colors.secondary, color: colors.text, backgroundColor: colors.tertiary }} required />
-              <input type="email" name="email" placeholder="Email" value={headDelegate.email} onChange={handleHeadDelegateChange} className="p-2 rounded-lg border-2" style={{ borderColor: colors.secondary, color: colors.text, backgroundColor: colors.tertiary }} required />
+              <input type="tel" name="phone" placeholder="Phone" value={headDelegate.phone} onChange={handleHeadDelegateChange} className="p-2 rounded-lg border-2" style={{ borderColor: colors.secondary, color: colors.text, backgroundColor: colors.tertiary }} required />
               <input type="text" name="reg_no" placeholder="Reg. No" value={headDelegate.reg_no} onChange={handleHeadDelegateChange} className="p-2 rounded-lg border-2" style={{ borderColor: colors.secondary, color: colors.text, backgroundColor: colors.tertiary }} required />
             </div>
             <div className="flex flex-col mt-4">
@@ -565,7 +565,7 @@ const InstitutionalRegistrationPage = ({ setActivePage, setMessage, colors, init
                         {team.participants.map((participant, participantIndex) => (
                           <div key={participantIndex} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                             <input type="text" name="name" placeholder="Name" value={participant.name} onChange={(e) => handleTeamChange(formIndex, teamIndex, participantIndex, e)} className="p-2 rounded-lg border-2" style={{ borderColor: colors.secondary, color: colors.text, backgroundColor: colors.card }} required />
-                            <input type="email" name="email" placeholder="Email" value={participant.email} onChange={(e) => handleTeamChange(formIndex, teamIndex, participantIndex, e)} className="p-2 rounded-lg border-2" style={{ borderColor: colors.secondary, color: colors.text, backgroundColor: colors.card }} required />
+                            <input type="tel" name="phone" placeholder="Phone" value={participant.phone} onChange={(e) => handleTeamChange(formIndex, teamIndex, participantIndex, e)} className="p-2 rounded-lg border-2" style={{ borderColor: colors.secondary, color: colors.text, backgroundColor: colors.card }} required />
                             <input type="text" name="reg_no" placeholder="Reg. No." value={participant.reg_no} onChange={(e) => handleTeamChange(formIndex, teamIndex, participantIndex, e)} className="p-2 rounded-lg border-2" style={{ borderColor: colors.secondary, color: colors.text, backgroundColor: colors.card }} required />
                           </div>
                         ))}
