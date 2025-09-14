@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import ReactDOM from 'react-dom';
 
 const lightColors = {
   primary: '#91A8CE',
@@ -96,11 +95,11 @@ const eventsData = [
 ];
 
 // Custom MessageBox component
-const MessageBox = ({ message, onClose }) => {
+const MessageBox = ({ message, onClose, colors }) => {
   if (!message) return null;
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-      <div className="bg-white p-8 rounded-lg shadow-lg text-center" style={{ color: colors.secondary, borderColor: colors.secondary, borderWidth: 2 }}>
+      <div className="p-8 rounded-lg shadow-lg text-center" style={{ color: colors.text, backgroundColor: colors.card, borderColor: colors.secondary, borderWidth: 2 }}>
         <p className="text-xl font-bold mb-4" style={{ fontFamily: 'Raleway' }}>{message}</p>
         <button
           onClick={onClose}
@@ -689,7 +688,7 @@ const RegistrationLookupPage = ({ setActivePage, setRegistrationData, colors }) 
             Load Registration
           </button>
         </div>
-        <MessageBox message={message} onClose={() => setMessage(null)} />
+        <MessageBox message={message} onClose={() => setMessage(null)} colors={colors} />
       </div>
     </div>
   );
@@ -906,18 +905,10 @@ const App = () => {
           <p className="text-sm font-light" style={{ fontFamily: 'Raleway' }}>© 2025 EQUINOX</p>
         </div>
       </footer>
-      <MessageBox message={message} onClose={() => setMessage(null)} />
+      <MessageBox message={message} onClose={() => setMessage(null)} colors={currentColors} />
     </div>
   );
 };
 
-// Use a self-executing function to avoid multiple renders
-window.onload = function() {
-  const container = document.getElementById('root');
-  if (!container._reactRoot) {
-    const root = ReactDOM.createRoot(container);
-    root.render(<App />);
-    container._reactRoot = root;
-  }
-};
+export default App;
 
