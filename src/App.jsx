@@ -1,5 +1,45 @@
 import React, { useState, useEffect } from 'react';
 
+/*
+* IMPORTANT: For this component to render correctly, please add the following
+* lines to the <head> section of your main index.html file.
+*
+* <!-- Tailwind CSS -->
+* <script src="https://cdn.tailwindcss.com"></script>
+*
+* <!-- Google Fonts -->
+* <link rel="preconnect" href="https://fonts.googleapis.com" />
+* <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
+* <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+*
+* <!-- Font Awesome for Icons -->
+* <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+*
+* <!-- Custom Styles -->
+* <style>
+* @font-face {
+* font-family: 'Modo Badoni';
+* src: url('https://fonts.cdnfonts.com/s/72225/ModaBadoni-LightItalic.woff') format('woff');
+* font-weight: 300;
+* font-style: italic;
+* }
+* @font-face {
+* font-family: 'Modo Badoni';
+* src: url('https://fonts.cdnfonts.com/s/72225/ModaBadoni-ExtraBold.woff') format('woff');
+* font-weight: 800;
+* font-style: normal;
+* }
+* body { margin: 0; font-family: 'Raleway', sans-serif; }
+* .animate-fade-in { animation: fadeIn 1s ease-in-out; }
+* .animate-slide-up { animation: slideUp 1s ease-in-out; }
+* .animate-fade-in-delay-1 { animation: fadeIn 1s ease-in-out 0.5s forwards; opacity: 0; }
+* .animate-pulse-once { animation: pulseOnce 1.5s ease-in-out; }
+* @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+* @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+* @keyframes pulseOnce { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+* </style>
+*/
+
 const lightColors = {
   primary: '#91A8CE',
   secondary: '#04315F',
@@ -776,40 +816,6 @@ const App = () => {
 
   return (
     <div className="font-sans flex flex-col min-h-screen">
-      {/* Tailwind CSS and Fonts */}
-      <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
-      <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
-      <style>
-        {`
-        @font-face {
-          font-family: 'Modo Badoni';
-          src: url('https://fonts.cdnfonts.com/s/72225/ModaBadoni-LightItalic.woff') format('woff');
-          font-weight: 300;
-          font-style: italic;
-        }
-        @font-face {
-          font-family: 'Modo Badoni';
-          src: url('https://fonts.cdnfonts.com/s/72225/ModaBadoni-ExtraBold.woff') format('woff');
-          font-weight: 800;
-          font-style: normal;
-        }
-
-        body { margin: 0; }
-        .animate-fade-in { animation: fadeIn 1s ease-in-out; }
-        .animate-slide-up { animation: slideUp 1s ease-in-out; }
-        .animate-fade-in-delay-1 { animation: fadeIn 1s ease-in-out 0.5s forwards; opacity: 0; }
-        .animate-pulse-once { animation: pulseOnce 1.5s ease-in-out; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        @keyframes pulseOnce { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
-        `}
-      </style>
-      <script src="https://cdn.tailwindcss.com"></script>
-      <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-      <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"></link>
-
       {/* Navigation */}
       <nav
         className="sticky top-0 left-0 right-0 z-50 p-4 sm:p-6 flex justify-between backdrop-blur-sm transition-all duration-300"
