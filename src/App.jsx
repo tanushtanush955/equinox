@@ -122,6 +122,17 @@ const HomePage = ({ setActivePage, colors }) => (
     <p className="max-w-xl text-md sm:text-lg md:text-xl mb-10 sm:mb-12 animate-fade-in-delay-1" style={{ fontFamily: 'Raleway', color: colors.text }}>
       Join us for an unforgettable interschool event showcasing talent, innovation, and creativity.
     </p>
+    <button
+      onClick={() => setActivePage('registration')}
+      className="px-6 py-3 sm:px-8 sm:py-4 text-lg sm:text-xl font-bold rounded-full shadow-lg transform transition-all duration-300 hover:scale-105 active:scale-95 animate-pulse-once"
+      style={{
+        backgroundColor: colors.primary,
+        color: colors.secondary,
+        border: `2px solid ${colors.secondary}`,
+      }}
+    >
+      Register Now
+    </button>
   </div>
 );
 
@@ -310,8 +321,9 @@ const IndividualRegistrationPage = ({ setActivePage, setMessage, colors }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const uid = crypto.randomUUID();
-    // This is where you would call a backend API to save the registration.
-    localStorage.setItem(uid, JSON.stringify({ type: 'individual', selectedEvent, participants }));
+    const registrationData = { type: 'individual', selectedEvent, participants };
+    console.log('Submitted data:', registrationData);
+    localStorage.setItem(uid, JSON.stringify(registrationData));
     setMessage(`Registration submitted successfully! Your UID is: ${uid}`);
     setActivePage('thank-you');
   };
@@ -495,9 +507,9 @@ const InstitutionalRegistrationPage = ({ setActivePage, setMessage, colors, init
   const handleSubmit = (e) => {
     e.preventDefault();
     const uid = crypto.randomUUID();
-    // This is a placeholder for backend registration. In a real app, this would be an API call.
-    // We use localStorage to simulate persistence for this demo.
-    localStorage.setItem(uid, JSON.stringify({ type: 'institution', schoolName, headDelegate, registrationForms }));
+    const registrationData = { type: 'institution', schoolName, headDelegate, registrationForms };
+    console.log('Submitted data:', registrationData);
+    localStorage.setItem(uid, JSON.stringify(registrationData));
     setMessage(`Institutional registration submitted! Your UID is: ${uid}`);
     setActivePage('thank-you');
   };
@@ -505,6 +517,13 @@ const InstitutionalRegistrationPage = ({ setActivePage, setMessage, colors, init
   return (
     <div className="min-h-screen flex flex-col items-center p-4 sm:p-8 transition-colors duration-500" style={{ backgroundColor: colors.background, color: colors.text }}>
       <div className="w-full max-w-xl md:max-w-3xl lg:max-w-4xl">
+        <button
+          onClick={() => setActivePage('registration')}
+          className="mb-4 px-4 py-2 text-sm font-bold rounded-full shadow-md transform transition-all duration-300 hover:scale-105 active:scale-95"
+          style={{ backgroundColor: colors.primary, color: colors.secondary }}
+        >
+          &larr; Go Back
+        </button>
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-8" style={{ fontFamily: 'Modo Badoni', color: colors.secondary }}>Institutional Registration</h1>
         
         <form onSubmit={handleSubmit} className="space-y-6">
