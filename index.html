@@ -4,7 +4,45 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
+    <title>Equinox 2025</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+    
+    <!-- Custom Fonts (Modo Badoni) -->
+    <style>
+      @font-face {
+        font-family: 'Modo Badoni';
+        src: url('https://fonts.cdnfonts.com/s/72225/ModoBadoni-LightItalic.woff') format('woff');
+        font-weight: 300;
+        font-style: italic;
+      }
+      @font-face {
+        font-family: 'Modo Badoni';
+        src: url('https://fonts.cdnfonts.com/s/72225/ModoBadoni-ExtraBold.woff') format('woff');
+        font-weight: 800;
+        font-style: normal;
+      }
+    </style>
+    
+    <!-- Tailwind CSS CDN (for dev; use PostCSS build for prod) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    
+    <!-- Custom Animations -->
+    <style>
+      .animate-fade-in { animation: fadeIn 1s ease-in-out; }
+      .animate-slide-up { animation: slideUp 1s ease-in-out; }
+      .animate-fade-in-delay-1 { animation: fadeIn 1s ease-in-out 0.5s forwards; opacity: 0; }
+      .animate-pulse-once { animation: pulseOnce 1.5s ease-in-out; }
+      @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+      @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+      @keyframes pulseOnce { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+    </style>
   </head>
   <body>
     <div id="root"></div>

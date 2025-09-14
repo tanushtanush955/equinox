@@ -751,6 +751,8 @@ const ContactPage = ({ colors }) => (
   </div>
 );
 
+// ... (keep all your eventsData, MessageBox, and other components unchanged; they're fine)
+
 // App.jsx (Main App Component)
 const App = () => {
   const [activePage, setActivePage] = useState('home');
@@ -774,74 +776,44 @@ const App = () => {
     }
   }, [registrationData]);
 
-
   return (
-    <div className="font-sans flex flex-col min-h-screen">
-      {/* Tailwind CSS and Fonts */}
-      <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
-      <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
-      <style>
-        {`
-        @font-face {
-          font-family: 'Modo Badoni';
-          src: url('https://fonts.cdnfonts.com/s/72225/ModaBadoni-LightItalic.woff') format('woff');
-          font-weight: 300;
-          font-style: italic;
-        }
-        @font-face {
-          font-family: 'Modo Badoni';
-          src: url('https://fonts.cdnfonts.com/s/72225/ModaBadoni-ExtraBold.woff') format('woff');
-          font-weight: 800;
-          font-style: normal;
-        }
-
-        body { margin: 0; }
-        .animate-fade-in { animation: fadeIn 1s ease-in-out; }
-        .animate-slide-up { animation: slideUp 1s ease-in-out; }
-        .animate-fade-in-delay-1 { animation: fadeIn 1s ease-in-out 0.5s forwards; opacity: 0; }
-        .animate-pulse-once { animation: pulseOnce 1.5s ease-in-out; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        @keyframes pulseOnce { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
-        `}
-      </style>
-      <script src="https://cdn.tailwindcss.com"></script>
-      <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-      <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"></link>
-
+    <div className="font-sans flex flex-col min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
       {/* Navigation */}
       <nav
-        className="sticky top-0 left-0 right-0 z-50 p-4 sm:p-6 flex justify-between backdrop-blur-sm transition-all duration-300"
-        style={{ color: currentColors.secondary, backgroundColor: isDarkTheme ? 'rgba(4, 49, 95, 0.5)' : 'rgba(255, 251, 250, 0.5)' }}
+        className="sticky top-0 left-0 right-0 z-50 p-4 sm:p-6 flex justify-between items-center backdrop-blur-sm transition-all duration-300"
+        style={{ 
+          color: currentColors.text, 
+          backgroundColor: isDarkTheme ? 'rgba(4, 49, 95, 0.8)' : 'rgba(255, 251, 250, 0.8)',
+          borderBottom: `1px solid ${currentColors.primary}20`
+        }}
       >
-        <div className="flex space-x-4 sm:space-x-8 text-md sm:text-xl font-bold rounded-full p-2 transition-all duration-300" style={{ backgroundColor: currentColors.tertiary, boxShadow: `0 4px 6px -1px ${currentColors.secondary}40` }}>
+        <div className="flex space-x-4 sm:space-x-8 text-md sm:text-xl font-bold rounded-full p-2 transition-all duration-300 shadow-lg" 
+             style={{ backgroundColor: currentColors.background, boxShadow: `0 4px 6px -1px ${currentColors.secondary}40` }}>
           <button
             onClick={() => setActivePage('home')}
             className="px-3 py-2 sm:px-4 sm:py-2 rounded-full transform transition-all duration-300 hover:scale-110 active:scale-95"
-            style={{ color: activePage === 'home' ? currentColors.secondary : currentColors.primary }}
+            style={{ color: activePage === 'home' ? currentColors.secondary : currentColors.text }}
           >
             Home
           </button>
           <button
             onClick={() => setActivePage('about')}
             className="px-3 py-2 sm:px-4 sm:py-2 rounded-full transform transition-all duration-300 hover:scale-110 active:scale-95"
-            style={{ color: activePage === 'about' ? currentColors.secondary : currentColors.primary }}
+            style={{ color: activePage === 'about' ? currentColors.secondary : currentColors.text }}
           >
             About
           </button>
           <button
             onClick={() => setActivePage('events')}
             className="px-3 py-2 sm:px-4 sm:py-2 rounded-full transform transition-all duration-300 hover:scale-110 active:scale-95"
-            style={{ color: activePage === 'events' ? currentColors.secondary : currentColors.primary }}
+            style={{ color: activePage === 'events' ? currentColors.secondary : currentColors.text }}
           >
             Events
           </button>
           <button
             onClick={() => setActivePage('contact')}
             className="px-3 py-2 sm:px-4 sm:py-2 rounded-full transform transition-all duration-300 hover:scale-110 active:scale-95"
-            style={{ color: activePage === 'contact' ? currentColors.secondary : currentColors.primary }}
+            style={{ color: activePage === 'contact' ? currentColors.secondary : currentColors.text }}
           >
             Contact
           </button>
@@ -852,20 +824,20 @@ const App = () => {
             className="px-4 py-2 text-sm sm:text-lg font-bold rounded-full shadow-lg transform transition-all duration-300 hover:scale-105 active:scale-95"
             style={{
               backgroundColor: currentColors.primary,
-              color: currentColors.secondary,
+              color: currentColors.background,
               border: `2px solid ${currentColors.secondary}`,
             }}
           >
             Register
           </button>
-          <button onClick={() => setIsDarkTheme(!isDarkTheme)} className="text-xl sm:text-2xl" style={{ color: currentColors.secondary }}>
+          <button onClick={() => setIsDarkTheme(!isDarkTheme)} className="text-xl sm:text-2xl" style={{ color: currentColors.text }}>
             {isDarkTheme ? <i className="fas fa-sun"></i> : <i className="fas fa-moon"></i>}
           </button>
         </div>
       </nav>
 
       {/* Main Content Area */}
-      <main className="flex-grow relative">
+      <main className="flex-grow relative max-w-7xl mx-auto p-4 sm:p-8">
         {(() => {
           switch (activePage) {
             case 'home':
@@ -885,7 +857,7 @@ const App = () => {
             case 'event-detail':
               return <EventDetailPage event={selectedEvent} onBack={() => setActivePage('events')} colors={currentColors} />;
             case 'thank-you':
-              return <ThankYouPage colors={currentColors} registrationUID={message.split(': ')[1]} />;
+              return <ThankYouPage colors={currentColors} registrationUID={message ? message.split(': ')[1] : null} />;
             case 'registration-lookup':
               return <RegistrationLookupPage setActivePage={setActivePage} setRegistrationData={setRegistrationData} colors={currentColors} />;
             default:
@@ -894,30 +866,26 @@ const App = () => {
         })()}
       </main>
 
-      {/* Footer with Instagram icon */}
+      {/* Footer */}
       <footer
-        className="p-4 text-center transition-colors duration-500"
-        style={{ backgroundColor: currentColors.tertiary, color: currentColors.secondary }}
+        className="p-4 text-center transition-colors duration-500 border-t"
+        style={{ 
+          backgroundColor: currentColors.tertiary, 
+          color: currentColors.text,
+          borderColor: currentColors.primary + '20'
+        }}
       >
-        <div className="flex items-center justify-between px-4">
+        <div className="flex items-center justify-between px-4 max-w-7xl mx-auto">
           <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-3xl transition-transform transform hover:scale-125">
-             <i className="fab fa-instagram"></i>
+            <i className="fab fa-instagram" style={{ color: currentColors.primary }}></i>
           </a>
           <p className="text-sm font-light" style={{ fontFamily: 'Raleway' }}>© 2025 EQUINOX</p>
         </div>
       </footer>
-      <MessageBox message={message} onClose={() => setMessage(null)} />
+      <MessageBox message={message} onClose={() => setMessage(null)} colors={currentColors} />
     </div>
   );
 };
 
-// Use a self-executing function to avoid multiple renders
-window.onload = function() {
-  const container = document.getElementById('root');
-  if (!container._reactRoot) {
-    const root = ReactDOM.createRoot(container);
-    root.render(<App />);
-    container._reactRoot = root;
-  }
-};
+export default App;
 
