@@ -1,5 +1,6 @@
 import { eventsData} from "../data";
 import React, { useState, useEffect } from 'react';
+import { sendRegistrationDataIndividual } from "../services/RegistrationApiEndpoint";
 
 const IndividualRegistrationPage = ({ setActivePage, setMessage, colors }) => {
   const [participants, setParticipants] = useState([]);
@@ -25,14 +26,20 @@ const IndividualRegistrationPage = ({ setActivePage, setMessage, colors }) => {
 	setParticipants(newParticipants);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
 	e.preventDefault();
-	const uid = crypto.randomUUID();
 	const registrationData = { type: 'individual', selectedEvent, participants };
+	try{
+		const response = await sendRegistrationDataIndividual(registrationData);
+		console.log(response)
+		setMessage(`Registration submitted successfully! Your UID is: ${response.uid}`);
+		setActivePage('thank-you');
+		localStorage.setItem(response.uid, JSON.stringify(registrationData));
+	}
+	catch (error) {
+      setMessage('Error submitting registration. Please try again.');
+    }
 	console.log('Submitted data:', registrationData);
-	localStorage.setItem(uid, JSON.stringify(registrationData));
-	setMessage(`Registration submitted successfully! Your UID is: ${uid}`);
-	setActivePage('thank-you');
   };
 
   const allEvents = eventsData.flatMap(category => category.events.map(event => event.name));
@@ -92,7 +99,7 @@ const IndividualRegistrationPage = ({ setActivePage, setMessage, colors }) => {
 					/>
 				  </div>
 				  <div className="flex flex-col">
-					<label className="text-sm sm:text-base font-medium mb-1" style={{ fontFamily: 'Raleway' }}>Reg. No</label>
+					<label className="text-sm sm:text-base font-medium mb-1" style={{ fontFamily: 'Raleway' }}>email id</label>
 					<input
 					  type="text"
 					  name="reg_no"

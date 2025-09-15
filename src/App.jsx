@@ -37,7 +37,6 @@ const App = () => {
       }));
     }
 
-    // Font Awesome
     if (!document.getElementById('fontawesome-link')) {
         const link = document.createElement('link');
         link.id = 'fontawesome-link';
@@ -45,6 +44,18 @@ const App = () => {
         link.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css';
         document.head.appendChild(link);
     }
+
+    if (!document.getElementById('google-fonts-main')) {
+    promises.push(new Promise((resolve) => {
+      const link = document.createElement('link');
+      link.id = 'google-fonts-main';
+      link.rel = 'stylesheet';
+      link.href = 'https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Raleway:ital,wght@0,100..900;1,100..900&family=Chivo:ital,wght@0,100..900;1,100..900&display=swap';
+      link.onload = resolve;
+      link.onerror = resolve;
+      document.head.appendChild(link);
+    }));
+  }
 
     // Google Fonts
     if (!document.getElementById('google-fonts-main')) {
@@ -58,30 +69,25 @@ const App = () => {
         document.head.appendChild(link);
       }));
     }
+    
 
-    // Custom Styles
+      // Custom Styles
     if (!document.getElementById('custom-styles')) {
       const style = document.createElement('style');
       style.id = 'custom-styles';
       style.innerHTML = `
-        @font-face {
-          font-family: 'Modo Badoni';
-          src: url('https://fonts.cdnfonts.com/s/72225/ModaBadoni-LightItalic.woff') format('woff');
-          font-weight: 300;
-          font-style: italic;
-        }
-        @font-face {
-          font-family: 'Modo Badoni';
-          src: url('https://fonts.cdnfonts.com/s/72225/ModaBadoni-ExtraBold.woff') format('woff');
-          font-weight: 800;
-          font-style: normal;
-        }
         html, body {
           margin: 0;
           padding: 0;
-          font-family: 'Raleway', sans-serif;
+          font-family: 'Libre Baskerville', serif;
           width: 100%;
           overflow-x: hidden;
+        }
+        h1, h2, h3, h4, h5, h6 {
+          font-family: 'Raleway', sans-serif;
+        }
+        .tertiary-font {
+          font-family: 'Chivo', sans-serif;
         }
         .animate-fade-in { animation: fadeIn 1s ease-in-out; }
         .animate-slide-up { animation: slideUp 1s ease-in-out; }
@@ -94,21 +100,21 @@ const App = () => {
       document.head.appendChild(style);
     }
     
-    // Google Fonts Preconnect links (don't need to be awaited)
+      // Google Fonts Preconnect links
     if (!document.getElementById('google-fonts-preconnect1')) {
-        const link = document.createElement('link');
-        link.id = 'google-fonts-preconnect1';
-        link.rel = 'preconnect';
-        link.href = 'https://fonts.googleapis.com';
-        document.head.appendChild(link);
+      const link = document.createElement('link');
+      link.id = 'google-fonts-preconnect1';
+      link.rel = 'preconnect';
+      link.href = 'https://fonts.googleapis.com';
+      document.head.appendChild(link);
     }
     if (!document.getElementById('google-fonts-preconnect2')) {
-        const link = document.createElement('link');
-        link.id = 'google-fonts-preconnect2';
-        link.rel = 'preconnect';
-        link.href = 'https://fonts.gstatic.com';
-        link.crossOrigin = 'true';
-        document.head.appendChild(link);
+      const link = document.createElement('link');
+      link.id = 'google-fonts-preconnect2';
+      link.rel = 'preconnect';
+      link.href = 'https://fonts.gstatic.com';
+      link.crossOrigin = 'true';
+      document.head.appendChild(link);
     }
 
     Promise.all(promises).then(() => {
@@ -204,40 +210,44 @@ const App = () => {
           >
             Register
           </button>
-          <button onClick={() => setIsDarkTheme(!isDarkTheme)} className="text-xl sm:text-2xl" style={{ color: currentColors.secondary }}>
+          <button
+            onClick={() => setIsDarkTheme(!isDarkTheme)}
+            className="px-4 py-2 rounded-md outline-none focus:outline-none active:outline-none hover:outline-none ring-0 focus:ring-0 active:ring-0 hover:ring-0 text-xl sm:text-2xl font-['Chivo'] flex items-center justify-center"
+            aria-label={isDarkTheme ? "Switch to light mode" : "Switch to dark mode"}
+          >
             {isDarkTheme ? <i className="fas fa-sun"></i> : <i className="fas fa-moon"></i>}
           </button>
         </div>
       </nav>
 
       {/* Main Content Area */}
-      <main className="flex-grow relative">
-        {(() => {
-          switch (activePage) {
-            case 'home':
-              return <HomePage setActivePage={setActivePage} colors={currentColors} />;
-            case 'about':
-              return <AboutPage colors={currentColors} />;
-            case 'events':
-              return <EventsPage setActivePage={setActivePage} setSelectedEvent={setSelectedEvent} colors={currentColors} />;
-            case 'contact':
-              return <ContactPage colors={currentColors} />;
-            case 'registration':
-              return <RegistrationPage setActivePage={setActivePage} colors={currentColors} />;
-            case 'individual-registration':
-              return <IndividualRegistrationPage setActivePage={setActivePage} setMessage={setMessage} colors={currentColors} />;
-            case 'institution-registration':
-              return <InstitutionalRegistrationPage setActivePage={setActivePage} setMessage={setMessage} colors={currentColors} initialData={registrationData} />;
-            case 'event-detail':
-              return <EventDetailPage event={selectedEvent} onBack={() => setActivePage('events')} colors={currentColors} />;
-            case 'thank-you':
-              return <ThankYouPage colors={currentColors} registrationUID={message.split(': ')[1]} />;
-            case 'registration-lookup':
-              return <RegistrationLookupPage setActivePage={setActivePage} setRegistrationData={setRegistrationData} colors={currentColors} />;
-            default:
-              return <HomePage setActivePage={setActivePage} colors={currentColors} />;
-          }
-        })()}
+        <main className="flex-grow relative">
+          {(() => {
+            switch (activePage) {
+              case 'home':
+                return <HomePage setActivePage={setActivePage} colors={currentColors} />;
+              case 'about':
+                return <AboutPage colors={currentColors} />;
+              case 'events':
+                return <EventsPage setActivePage={setActivePage} setSelectedEvent={setSelectedEvent} colors={currentColors} />;
+              case 'contact':
+                return <ContactPage colors={currentColors} />;
+              case 'registration':
+                return <RegistrationPage setActivePage={setActivePage} colors={currentColors} />;
+              case 'individual-registration':
+                return <IndividualRegistrationPage setActivePage={setActivePage} setMessage={setMessage} colors={currentColors} />;
+              case 'institution-registration':
+                return <InstitutionalRegistrationPage setActivePage={setActivePage} setMessage={setMessage} colors={currentColors} initialData={registrationData} />;
+              case 'event-detail':
+                return <EventDetailPage event={selectedEvent} onBack={() => setActivePage('events')} colors={currentColors} />;
+              case 'thank-you':
+                return <ThankYouPage colors={currentColors} registrationUID={message.split(': ')[1]} />;
+              case 'registration-lookup':
+                return <RegistrationLookupPage setActivePage={setActivePage} setRegistrationData={setRegistrationData} colors={currentColors} />;
+              default:
+                return <HomePage setActivePage={setActivePage} colors={currentColors} />;
+            }
+          })()}
       </main>
 
       {/* Footer with Instagram icon */}
@@ -246,7 +256,7 @@ const App = () => {
         style={{ backgroundColor: currentColors.tertiary, color: currentColors.secondary }}
       >
         <div className="flex items-center justify-between px-4">
-          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-3xl transition-transform transform hover:scale-125">
+          <a href="https://www.instagram.com/equinox_sjpuc?igsh=MTBya3EweHZlM3Qx" target="_blank" rel="noopener noreferrer" className="text-3xl transition-transform transform hover:scale-125">
              <i className="fab fa-instagram"></i>
           </a>
           <p className="text-sm font-light" style={{ fontFamily: 'Raleway' }}>© 2025 EQUINOX</p>
