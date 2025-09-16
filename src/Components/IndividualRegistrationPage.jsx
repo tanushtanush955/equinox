@@ -35,7 +35,6 @@ const IndividualRegistrationPage = ({ setActivePage, setMessage, colors }) => {
 		console.log(response)
 		setMessage(`Registration submitted successfully! Your UID is: ${response.uid}`);
 		setActivePage('thank-you');
-		localStorage.setItem(response.uid, JSON.stringify(registrationData));
 	}
 	catch (error) {
       setMessage('Error submitting registration. Please try again.');

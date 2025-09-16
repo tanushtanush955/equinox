@@ -106,7 +106,6 @@ const InstitutionalRegistrationPage = ({ setActivePage, setMessage, colors, init
 		console.log(response.uid)
 		setMessage(`Institutional registration submitted! Your UID is: ${response.uid}`);
 		setActivePage('thank-you');
-		localStorage.setItem(response.uid, JSON.stringify(registrationData));
 	}
 	catch (error) {
 		setMessage('Error submitting registration. Please try again.');
