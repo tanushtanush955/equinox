@@ -1,24 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import MessageBox from './MessageBox';
+import { set_selected_uid } from '../data';
+import { lookupRegistration } from '../services/RegistrationApiEndpoint';
 
 const RegistrationLookupPage = ({ setActivePage, setRegistrationData, colors }) => {
   const [uid, setUid] = useState('');
   const [message, setMessage] = useState(null);
 
-  const handleLookup = () => {
-	// This simulates fetching data from a backend
-	const storedData = localStorage.getItem(uid);
-	if (storedData) {
-	  const data = JSON.parse(storedData);
-	  setRegistrationData(data);
-	  if (data.type === 'institution') {
-		setActivePage('institution-registration');
-	  } else {
-		setActivePage('individual-registration');
-	  }
-	} else {
-	  setMessage("Registration ID not found. Please try again.");
-	}
+  const handleLookup = async () => {
+	set_selected_uid(uid);
+
+	lookupRegistration(uid)
+	.then(data => {
+		if (data === undefined) {
+		setMessage("Registration ID not found. Please try again.");
+		} else {
+		setRegistrationData(data);
+			if (data.type === 'institution') {
+			setActivePage('institution-registration');
+			} 
+			else {
+			setActivePage('individual-registration');
+			}
+		}
+	})
+	.catch(error => {
+		setMessage('Failed to fetch data:', error);
+	});
   };
 
   return (

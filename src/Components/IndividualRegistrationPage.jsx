@@ -1,6 +1,7 @@
 import { eventsData} from "../data";
 import React, { useState, useEffect } from 'react';
 import { sendRegistrationDataIndividual } from "../services/RegistrationApiEndpoint";
+import { get_selected_uid } from "../data";
 
 const IndividualRegistrationPage = ({ setActivePage, setMessage, colors }) => {
   const [participants, setParticipants] = useState([]);
@@ -28,7 +29,7 @@ const IndividualRegistrationPage = ({ setActivePage, setMessage, colors }) => {
 
   const handleSubmit = async (e) => {
 	e.preventDefault();
-	const registrationData = { type: 'individual', selectedEvent, participants };
+	const registrationData = {registration_uid: get_selected_uid(), type: 'individual', selectedEvent, participants };
 	try{
 		const response = await sendRegistrationDataIndividual(registrationData);
 		console.log(response)
@@ -99,11 +100,11 @@ const IndividualRegistrationPage = ({ setActivePage, setMessage, colors }) => {
 					/>
 				  </div>
 				  <div className="flex flex-col">
-					<label className="text-sm sm:text-base font-medium mb-1" style={{ fontFamily: 'Raleway' }}>email id</label>
+					<label className="text-sm sm:text-base font-medium mb-1" style={{ fontFamily: 'Raleway' }}>email</label>
 					<input
-					  type="text"
-					  name="reg_no"
-					  value={participant.reg_no}
+					  type="email"
+					  name="email"
+					  value={participant.email}
 					  onChange={(e) => handleInputChange(index, e)}
 					  className="p-2 sm:p-3 rounded-lg border-2"
 					  style={{ borderColor: colors.secondary, color: colors.text, backgroundColor: colors.tertiary }}

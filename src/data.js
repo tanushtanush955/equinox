@@ -27,6 +27,23 @@ let category_descriptions = {
   'Exclusive Events':'Special events for select participants.'
 }
 
+let selected_uid = "";
+
+export function set_selected_uid(uid){
+  console.log(`Setting uid ${selected_uid} to ${uid}`)
+  selected_uid = uid;
+}
+
+export function create_and_set_uid(){
+  let created_uid = crypto.randomUUID();
+  set_selected_uid(created_uid);
+}
+
+export function get_selected_uid(uid){
+  console.log(`returning uid value ${selected_uid}`);
+  return selected_uid;
+}
+
 export let eventsData = [];
 
 function parse_fetched_events_data(data){

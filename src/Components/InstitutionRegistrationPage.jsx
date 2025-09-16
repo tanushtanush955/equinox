@@ -1,11 +1,12 @@
 import { eventsData} from "../data";
 import React, { useState, useEffect } from 'react';
 import { sendRegistrationDataInstitution } from "../services/RegistrationApiEndpoint";
+import { get_selected_uid } from "../data";
 
 const InstitutionalRegistrationPage = ({ setActivePage, setMessage, colors, initialData }) => {
   const [schoolName, setSchoolName] = useState(initialData?.schoolName || '');
   const [selectedEvents, setSelectedEvents] = useState(initialData?.registrationForms.map(f => f.eventName) || []);
-  const [headDelegate, setHeadDelegate] = useState(initialData?.headDelegate || { name: '', phone: '', reg_no: '' });
+  const [headDelegate, setHeadDelegate] = useState(initialData?.headDelegate || { name: '', phone: '', email: '' });
   const [registrationForms, setRegistrationForms] = useState(initialData?.registrationForms || []);
 
   const allEvents = eventsData.flatMap(category => category.events);
@@ -99,7 +100,7 @@ const InstitutionalRegistrationPage = ({ setActivePage, setMessage, colors, init
 
   const handleSubmit = async (e) => {
 	e.preventDefault();
-	const registrationData = { type: 'institution', schoolName, headDelegate, registrationForms };
+	const registrationData = {registration_uid: get_selected_uid(), type: 'institution', schoolName, headDelegate, registrationForms };
 	try{
 		const response = await sendRegistrationDataInstitution(registrationData);
 		console.log(response.uid)
@@ -144,7 +145,7 @@ const InstitutionalRegistrationPage = ({ setActivePage, setMessage, colors, init
 			<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
 			  <input type="text" name="name" placeholder="Name" value={headDelegate.name} onChange={handleHeadDelegateChange} className="p-2 rounded-lg border-2" style={{ borderColor: colors.secondary, color: colors.text, backgroundColor: colors.tertiary }} required />
 			  <input type="tel" name="phone" placeholder="Phone" value={headDelegate.phone} onChange={handleHeadDelegateChange} className="p-2 rounded-lg border-2" style={{ borderColor: colors.secondary, color: colors.text, backgroundColor: colors.tertiary }} required />
-			  <input type="text" name="reg_no" placeholder="Email" value={headDelegate.reg_no} onChange={handleHeadDelegateChange} className="p-2 rounded-lg border-2" style={{ borderColor: colors.secondary, color: colors.text, backgroundColor: colors.tertiary }} required />
+			  <input type="email" name="email" placeholder="Email" value={headDelegate.email} onChange={handleHeadDelegateChange} className="p-2 rounded-lg border-2" style={{ borderColor: colors.secondary, color: colors.text, backgroundColor: colors.tertiary }} required />
 			</div>
 			<div className="flex flex-col mt-4">
 			  <h3 className="text-sm sm:text-base font-medium mb-2" style={{ fontFamily: 'Raleway' }}>Select Events</h3>

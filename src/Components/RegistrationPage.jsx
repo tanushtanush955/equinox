@@ -1,3 +1,5 @@
+import { create_and_set_uid } from "../data";
+
 const RegistrationPage = ({ setActivePage, colors }) => (
   <div className="min-h-screen flex flex-col items-center justify-center text-center p-4 sm:p-8" style={{ backgroundColor: colors.background, color: colors.text }}>
 	<h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 sm:mb-8" style={{ fontFamily: 'Modo Badoni', color: colors.secondary }}>Choose Your Registration Type</h1>
@@ -12,7 +14,7 @@ const RegistrationPage = ({ setActivePage, colors }) => (
 		  color: colors.secondary,
 		  border: `2px solid ${colors.secondary}`,
 		}}
-		onClick={() => setActivePage('individual-registration')}
+		onClick={() => {create_and_set_uid(); setActivePage('individual-registration')}}
 	  >
 		Individual
 	  </button>
@@ -23,7 +25,7 @@ const RegistrationPage = ({ setActivePage, colors }) => (
 		  color: colors.secondary,
 		  border: `2px solid ${colors.secondary}`,
 		}}
-		onClick={() => setActivePage('institution-registration')}
+		onClick={() => {create_and_set_uid(); setActivePage('institution-registration')}}
 	  >
 		Institution
 	  </button>
