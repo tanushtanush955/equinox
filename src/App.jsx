@@ -11,6 +11,7 @@ import IndividualRegistrationPage from './Components/IndividualRegistrationPage'
 import InstitutionalRegistrationPage from './Components/InstitutionRegistrationPage';
 import ThankYouPage from './Components/ThankYouPage';
 import RegistrationLookupPage from './Components/RegistrationLookupPage';
+import { set_selected_uid } from './data';
 
 // App.jsx (Main App Component)
 const App = () => {
@@ -126,7 +127,13 @@ const App = () => {
 
   }, []);
 
-
+  useEffect(() => {
+    if (activePage === 'registration') {
+      set_selected_uid('');
+      setRegistrationData(null);
+    }
+  }, [activePage]);
+  
   useEffect(() => {
     if (registrationData) {
       if (registrationData.type === 'institution') {
@@ -141,6 +148,7 @@ const App = () => {
     }
   }, [registrationData]);
 
+  
   if (isLoading) {
     return (
       <div style={{
