@@ -133,20 +133,6 @@ const App = () => {
       setRegistrationData(null);
     }
   }, [activePage]);
-  
-  useEffect(() => {
-    if (registrationData) {
-      if (registrationData.type === 'institution') {
-        const storedUID = localStorage.getItem('lastInstitutionalUID');
-        if (storedUID) {
-          const data = JSON.parse(localStorage.getItem(storedUID));
-          if (data) {
-            setRegistrationData(data);
-          }
-        }
-      }
-    }
-  }, [registrationData]);
 
   
   if (isLoading) {
