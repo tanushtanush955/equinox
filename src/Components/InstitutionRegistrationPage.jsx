@@ -108,7 +108,9 @@ const InstitutionalRegistrationPage = ({ setActivePage, setMessage, colors, init
 		setActivePage('thank-you');
 	}
 	catch (error) {
-		setMessage('Error submitting registration. Please try again.');
+		const code = error.detail?.code || 'UNKNOWN';
+    	const message = error.detail?.message || error.message || 'Something went wrong';
+    	setMessage(`Error submitting registration: [${code}] ${message}`);
 	  }
 	console.log('Submitted data:', registrationData);
   };

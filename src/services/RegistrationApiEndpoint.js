@@ -13,7 +13,8 @@ export const sendRegistrationDataIndividual = async (registrationData) => {
     });
 
     if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
+      const errorData = await response.json().catch(() => ({}));
+      throw errorData;
     }
 
     const data = await response.json();
@@ -35,7 +36,8 @@ export const lookupRegistration = async (uid) => {
     });
     
     if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
+      const errorData = await response.json().catch(() => ({}));
+      throw errorData;
     }
     const data = await response.json();
     if (Object.keys(data).length === 0) {
