@@ -13,8 +13,19 @@ export const sendRegistrationDataIndividual = async (registrationData) => {
     });
 
     if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
-      throw errorData;
+      let errorData = {};
+      try {
+        errorData = await response.json(); // try to parse JSON
+      } catch {
+        errorData = { detail: { code: 'UNKNOWN', message: 'Something went wrong' } };
+      }
+
+      // Ensure we always throw an object with 'detail'
+      if (!errorData.detail) {
+        errorData.detail = { code: 'UNKNOWN', message: 'Something went wrong' };
+      }
+
+      throw errorData; // throw for catch in handleSubmit
     }
 
     const data = await response.json();
@@ -36,8 +47,7 @@ export const lookupRegistration = async (uid) => {
     });
     
     if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
-      throw errorData;
+      throw new Error(`HTTP error! Status: ${response.status}`);
     }
     const data = await response.json();
     if (Object.keys(data).length === 0) {
@@ -62,7 +72,19 @@ export const sendRegistrationDataInstitution = async (registrationData) => {
     });
 
     if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
+      let errorData = {};
+      try {
+        errorData = await response.json(); // try to parse JSON
+      } catch {
+        errorData = { detail: { code: 'UNKNOWN', message: 'Something went wrong' } };
+      }
+
+      // Ensure we always throw an object with 'detail'
+      if (!errorData.detail) {
+        errorData.detail = { code: 'UNKNOWN', message: 'Something went wrong' };
+      }
+
+      throw errorData; // throw for catch in handleSubmit
     }
 
     const data = await response.json();
