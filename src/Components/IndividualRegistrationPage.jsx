@@ -46,7 +46,6 @@ const IndividualRegistrationPage = ({ setActivePage, setMessage, colors, initial
     const registrationData = { registration_uid: get_selected_uid(), type: 'individual', selectedEvent, participants, clubUid };
     try {
       const response = await sendRegistrationDataIndividual(registrationData);
-      console.log(response);
       setSubmitDisabled(false);
       setMessage(`Registration submitted successfully! Your UID is: ${response.uid}`);
       setActivePage('thank-you');
@@ -56,7 +55,6 @@ const IndividualRegistrationPage = ({ setActivePage, setMessage, colors, initial
       setMessage(`Error submitting registration: [${code}] ${message}`);
       setSubmitDisabled(false);
     }
-    console.log('Submitted data:', registrationData);
   };
 
   return (

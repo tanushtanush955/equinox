@@ -30,7 +30,6 @@ let category_descriptions = {
 let selected_uid = "";
 
 export function set_selected_uid(uid){
-  console.log(`Setting uid ${selected_uid} to ${uid}`)
   selected_uid = uid;
 }
 
@@ -40,7 +39,6 @@ export function create_and_set_uid(){
 }
 
 export function get_selected_uid(uid){
-  console.log(`returning uid value ${selected_uid}`);
   return selected_uid;
 }
 
@@ -90,8 +88,6 @@ function parse_fetched_events_data(data){
       }
     }
   }
-  console.log(event_name_to_id_map);
-  console.log(transformed_data);
   eventsData = transformed_data;
 }
 

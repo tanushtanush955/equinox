@@ -95,7 +95,6 @@ const InstitutionalRegistrationPage = ({ setActivePage, setMessage, colors, init
     const registrationData = { registration_uid: get_selected_uid(), type: 'institution', schoolName, headDelegate, registrationForms };
     try {
       const response = await sendRegistrationDataInstitution(registrationData);
-      console.log(response.uid);
       setSubmitDisabled(false);
       setMessage(`Institutional registration submitted! Your UID is: ${response.uid}`);
       setActivePage('thank-you');
@@ -105,7 +104,6 @@ const InstitutionalRegistrationPage = ({ setActivePage, setMessage, colors, init
       setMessage(`Error submitting registration: [${code}] ${message}`);
 	  setSubmitDisabled(false);
     }
-    console.log('Submitted data:', registrationData);
   };
 
   return (
