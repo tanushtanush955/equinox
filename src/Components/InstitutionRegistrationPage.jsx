@@ -103,6 +103,7 @@ const InstitutionalRegistrationPage = ({ setActivePage, setMessage, colors, init
       const code = error.detail?.code || 'UNKNOWN';
       const message = error.detail?.message || error.message || 'Something went wrong';
       setMessage(`Error submitting registration: [${code}] ${message}`);
+	  setSubmitDisabled(false);
     }
     console.log('Submitted data:', registrationData);
   };
