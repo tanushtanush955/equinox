@@ -256,7 +256,7 @@ const App = () => {
           <p className="text-sm font-light" style={{ fontFamily: 'Raleway' }}>© 2025 EQUINOX</p>
         </div>
       </footer>
-      <MessageBox message={message} onClose={() => {setMessage(null); setActivePage('main')}} colors={currentColors} />
+      <MessageBox message={message} onClose={() => setMessage(null)} colors={currentColors} />
     </div>
   );
 };
