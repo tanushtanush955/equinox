@@ -1,7 +1,7 @@
 import { eventsData} from "../data";
 import React, { useState, useEffect } from 'react';
 import { sendRegistrationDataIndividual } from "../services/RegistrationApiEndpoint";
-import { get_selected_uid } from "../data";
+import { get_selected_uid, get_event_id } from "../data";
 
 const IndividualRegistrationPage = ({ setActivePage, setMessage, colors }) => {
   const [submitDisabled, setSubmitDisabled] = useState(false); 
@@ -9,10 +9,10 @@ const IndividualRegistrationPage = ({ setActivePage, setMessage, colors }) => {
   const [selectedEvent, setSelectedEvent] = useState('');
 
   const handleEventChange = (e) => {
-	const eventName = e.target.value;
+	const eventName = get_event_id(e.target.value);
 	setSelectedEvent(eventName);
 	if (eventName) {
-	  const eventDetails = eventsData.flatMap(cat => cat.events).find(e => e.name === eventName);
+	  const eventDetails = eventsData.flatMap(cat => cat.events).find(e => e.event_uid === eventName);
 	  if (eventDetails) {
 		setParticipants(Array.from({ length: eventDetails.num_participants }, () => ({ name: '', phone: '', email: '' })));
 	  }
@@ -31,7 +31,8 @@ const IndividualRegistrationPage = ({ setActivePage, setMessage, colors }) => {
   const handleSubmit = async (e) => {
 	setSubmitDisabled(true);
 	e.preventDefault();
-	const registrationData = {registration_uid: get_selected_uid(), type: 'individual', selectedEvent, participants };
+	const clubUid = eventsData.flatMap(cat => cat.events).find(e => e.event_uid === selectedEvent)?.club_uid;
+	const registrationData = {registration_uid: get_selected_uid(), type: 'individual', selectedEvent, participants, clubUid };
 	try{
 		const response = await sendRegistrationDataIndividual(registrationData);
 		console.log(response)
@@ -43,6 +44,7 @@ const IndividualRegistrationPage = ({ setActivePage, setMessage, colors }) => {
 		const code = error.detail?.code || 'UNKNOWN';
     	const message = error.detail?.message || error.message || 'Something went wrong';
     	setMessage(`Error submitting registration: [${code}] ${message}`);
+		setSubmitDisabled(false);
     }
 	console.log('Submitted data:', registrationData);
   };

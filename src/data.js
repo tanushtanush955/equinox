@@ -45,12 +45,25 @@ export function get_selected_uid(uid){
 }
 
 export let eventsData = [];
+export let event_name_to_id_map = {
+
+}
+
+export function set_event_id(key,value){
+  event_name_to_id_map[key] = value
+}
+
+export function get_event_id(key){
+  return event_name_to_id_map[key]
+}
 
 function parse_fetched_events_data(data){
   let transformed_data = []
-  for (const [key,value] of Object.entries(data)){
+  for (const [club_key,value] of Object.entries(data)){
     for (const [key,value_inner] of Object.entries(value)){
       let new_eventdetails = {
+        club_uid:club_key,
+        event_uid:key,
         name: value_inner.event_name,
         details:value_inner.description,
         venue:value_inner.venue,
@@ -61,6 +74,8 @@ function parse_fetched_events_data(data){
         contact_no:value_inner.contact_no,
         fees:value_inner.fees
       }
+      set_event_id(new_eventdetails.name,new_eventdetails.event_uid);
+
       const category_object = transformed_data.find(obj=>obj.category === value_inner.event_type);
       if (category_object){
         category_object.events.push(new_eventdetails);
@@ -75,6 +90,8 @@ function parse_fetched_events_data(data){
       }
     }
   }
+  console.log(event_name_to_id_map);
+  console.log(transformed_data);
   eventsData = transformed_data;
 }
 
