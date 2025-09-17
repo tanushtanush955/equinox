@@ -4,6 +4,7 @@ import { set_selected_uid } from '../data';
 import { lookupRegistration } from '../services/RegistrationApiEndpoint';
 
 const RegistrationLookupPage = ({ setActivePage, setRegistrationData, colors }) => {
+	
   const [uid, setUid] = useState('');
   const [message, setMessage] = useState(null);
 

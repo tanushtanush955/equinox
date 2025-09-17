@@ -4,6 +4,7 @@ import { sendRegistrationDataInstitution } from "../services/RegistrationApiEndp
 import { get_selected_uid } from "../data";
 
 const InstitutionalRegistrationPage = ({ setActivePage, setMessage, colors, initialData }) => {
+  const [submitDisabled, setSubmitDisabled] = useState(false); 
   const [schoolName, setSchoolName] = useState(initialData?.schoolName || '');
   const [selectedEvents, setSelectedEvents] = useState(initialData?.registrationForms.map(f => f.eventName) || []);
   const [headDelegate, setHeadDelegate] = useState(initialData?.headDelegate || { name: '', phone: '', email: '' });
@@ -99,11 +100,13 @@ const InstitutionalRegistrationPage = ({ setActivePage, setMessage, colors, init
   };
 
   const handleSubmit = async (e) => {
+	setSubmitDisabled(true);
 	e.preventDefault();
 	const registrationData = {registration_uid: get_selected_uid(), type: 'institution', schoolName, headDelegate, registrationForms };
 	try{
 		const response = await sendRegistrationDataInstitution(registrationData);
 		console.log(response.uid)
+		setSubmitDisabled(false);
 		setMessage(`Institutional registration submitted! Your UID is: ${response.uid}`);
 		setActivePage('thank-you');
 	}
@@ -217,8 +220,9 @@ const InstitutionalRegistrationPage = ({ setActivePage, setMessage, colors, init
 			  ))}
 			  <div className="flex justify-center mt-8">
 				<button
+				  disabled = {submitDisabled}
 				  type="submit"
-				  className="px-8 py-4 text-lg font-bold rounded-full shadow-lg transform transition-all duration-300 hover:scale-105 active:scale-95"
+				  className="px-8 py-4 text-lg font-bold rounded-full shadow-lg transform transition-all duration-300 hover:scale-105 active:scale-95 disabled:bg-gray-400 disabled:cursor-not-allowed"
 				  style={{
 					backgroundColor: colors.primary,
 					color: colors.secondary,

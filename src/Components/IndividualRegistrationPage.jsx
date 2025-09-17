@@ -4,6 +4,7 @@ import { sendRegistrationDataIndividual } from "../services/RegistrationApiEndpo
 import { get_selected_uid } from "../data";
 
 const IndividualRegistrationPage = ({ setActivePage, setMessage, colors }) => {
+  const [submitDisabled, setSubmitDisabled] = useState(false); 
   const [participants, setParticipants] = useState([]);
   const [selectedEvent, setSelectedEvent] = useState('');
 
@@ -28,11 +29,13 @@ const IndividualRegistrationPage = ({ setActivePage, setMessage, colors }) => {
   };
 
   const handleSubmit = async (e) => {
+	setSubmitDisabled(true);
 	e.preventDefault();
 	const registrationData = {registration_uid: get_selected_uid(), type: 'individual', selectedEvent, participants };
 	try{
 		const response = await sendRegistrationDataIndividual(registrationData);
 		console.log(response)
+		setSubmitDisabled(false);
 		setMessage(`Registration submitted successfully! Your UID is: ${response.uid}`);
 		setActivePage('thank-you');
 	}	
@@ -117,8 +120,9 @@ const IndividualRegistrationPage = ({ setActivePage, setMessage, colors }) => {
 			))}
 			<div className="flex justify-center mt-8">
 			  <button
+			  	disabled={submitDisabled}
 				type="submit"
-				className="px-8 py-4 text-lg font-bold rounded-full shadow-lg transform transition-all duration-300 hover:scale-105 active:scale-95"
+				className="px-8 py-4 text-lg font-bold rounded-full shadow-lg transform transition-all duration-300 hover:scale-105 active:scale-95 disabled:bg-gray-400 disabled:cursor-not-allowed"
 				style={{
 				  backgroundColor: colors.primary,
 				  color: colors.secondary,

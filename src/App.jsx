@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { lightColors, darkColors } from './data';
+import { lightColors, darkColors, get_selected_uid } from './data';
 import HomePage from './Components/HomePage';
 import AboutPage from './Components/AboutPage';
 import EventDetailPage from './Components/EventsDetailPage';
@@ -235,7 +235,7 @@ const App = () => {
               case 'event-detail':
                 return <EventDetailPage event={selectedEvent} onBack={() => setActivePage('events')} colors={currentColors} />;
               case 'thank-you':
-                return <ThankYouPage colors={currentColors} registrationUID={message.split(': ')[1]} />;
+                return <ThankYouPage colors={currentColors} registrationUID={get_selected_uid()} />;
               case 'registration-lookup':
                 return <RegistrationLookupPage setActivePage={setActivePage} setRegistrationData={setRegistrationData} colors={currentColors} />;
               default:
