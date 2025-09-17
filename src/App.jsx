@@ -229,7 +229,7 @@ const App = () => {
               case 'registration':
                 return <RegistrationPage setActivePage={setActivePage} colors={currentColors} />;
               case 'individual-registration':
-                return <IndividualRegistrationPage setActivePage={setActivePage} setMessage={setMessage} colors={currentColors} />;
+                return <IndividualRegistrationPage setActivePage={setActivePage} setMessage={setMessage} colors={currentColors} initialData={registrationData}/>;
               case 'institution-registration':
                 return <InstitutionalRegistrationPage setActivePage={setActivePage} setMessage={setMessage} colors={currentColors} initialData={registrationData} />;
               case 'event-detail':
