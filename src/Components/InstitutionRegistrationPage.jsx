@@ -2,6 +2,7 @@ import { eventsData } from "../data";
 import React, { useState, useEffect } from 'react';
 import { sendRegistrationDataInstitution } from "../services/RegistrationApiEndpoint";
 import { get_selected_uid, get_event_id } from "../data";
+import { set_fees } from "../data";
 
 const InstitutionalRegistrationPage = ({ setActivePage, setMessage, colors, initialData }) => {
   const [submitDisabled, setSubmitDisabled] = useState(false); 
@@ -96,6 +97,7 @@ const InstitutionalRegistrationPage = ({ setActivePage, setMessage, colors, init
     try {
       const response = await sendRegistrationDataInstitution(registrationData);
       setSubmitDisabled(false);
+      set_fees(response.fees)
       setMessage(`Institutional registration submitted! Your UID is: ${response.uid}`);
       setActivePage('thank-you');
     } catch (error) {

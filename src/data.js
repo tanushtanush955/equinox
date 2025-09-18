@@ -55,6 +55,16 @@ export function get_event_id(key){
   return event_name_to_id_map[key]
 }
 
+let fees = 0;
+
+export function set_fees(amout){
+  fees = amout;
+}
+
+export function get_fees(amout){
+  return fees
+}
+
 function parse_fetched_events_data(data){
   let transformed_data = []
   for (const [club_key,value] of Object.entries(data)){
