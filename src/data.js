@@ -47,6 +47,17 @@ export let event_name_to_id_map = {
 
 }
 
+export let qr_code = ""
+
+export function set_qr_code(qr){
+  qr_code = qr
+}
+
+export function get_qr_code(){
+  return qr_code
+}
+
+
 export function set_event_id(key,value){
   event_name_to_id_map[key] = value
 }

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { sendRegistrationDataInstitution } from "../services/RegistrationApiEndpoint";
 import { get_selected_uid, get_event_id } from "../data";
 import { set_fees } from "../data";
+import { set_qr_code } from "../data";
 
 const InstitutionalRegistrationPage = ({ setActivePage, setMessage, colors, initialData }) => {
   const [submitDisabled, setSubmitDisabled] = useState(false); 
@@ -98,6 +99,7 @@ const InstitutionalRegistrationPage = ({ setActivePage, setMessage, colors, init
       const response = await sendRegistrationDataInstitution(registrationData);
       setSubmitDisabled(false);
       set_fees(response.fees)
+      set_qr_code(response.qr_code)
       setMessage(`Institutional registration submitted! Your UID is: ${response.uid}`);
       setActivePage('thank-you');
     } catch (error) {

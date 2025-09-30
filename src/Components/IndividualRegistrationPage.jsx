@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { sendRegistrationDataIndividual } from "../services/RegistrationApiEndpoint";
 import { get_selected_uid } from "../data";
 import { set_fees} from "../data";
+import { set_qr_code } from "../data";
 
 const IndividualRegistrationPage = ({ setActivePage, setMessage, colors, initialData }) => {
   const [submitDisabled, setSubmitDisabled] = useState(false); 
@@ -49,6 +50,7 @@ const IndividualRegistrationPage = ({ setActivePage, setMessage, colors, initial
       const response = await sendRegistrationDataIndividual(registrationData);
       setSubmitDisabled(false);
       set_fees(response.fees)
+      set_qr_code(response.qr_code)
       setMessage(`Registration submitted successfully! Your UID is: ${response.uid}`);
       setActivePage('thank-you');
     } catch (error) {
