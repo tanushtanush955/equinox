@@ -80,15 +80,15 @@ const App = () => {
         html, body {
           margin: 0;
           padding: 0;
-          font-family: 'Libre Baskerville', serif;
+          font-family: 'Raleway', sans-serif;
           width: 100%;
           overflow-x: hidden;
         }
         h1, h2, h3, h4, h5, h6 {
-          font-family: 'Raleway', sans-serif;
+          font-family: 'Libre Baskerville', serif;
         }
         .tertiary-font {
-          font-family: 'Chivo', sans-serif;
+          font-family: 'Libre Baskerville', sans-serif;
         }
         .animate-fade-in { animation: fadeIn 1s ease-in-out; }
         .animate-slide-up { animation: slideUp 1s ease-in-out; }
