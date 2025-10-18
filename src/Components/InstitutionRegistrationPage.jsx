@@ -157,7 +157,12 @@ const InstitutionalRegistrationPage = ({ setActivePage, setMessage, colors, init
                     key={index}
                     type="button"
                     onClick={() => handleEventClick(event.event_uid)}
-                    className={`p-2 rounded-lg text-left transition-colors duration-200 ${selectedEvents.includes(event.event_uid) ? 'bg-indigo-300 text-white font-semibold' : 'bg-gray-100 text-gray-700'}`}
+                    className="p-2 rounded-lg text-left transition-colors duration-200"
+                    style={{
+                      backgroundColor: selectedEvents.includes(event.event_uid) ? colors.primary : colors.background,
+                      color: selectedEvents.includes(event.event_uid) ? colors.secondary : colors.text,
+                      fontWeight: selectedEvents.includes(event.event_uid) ? 600 : 400,
+                    }}
                   >
                     {event.name}
                   </button>
