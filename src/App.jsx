@@ -171,13 +171,6 @@ const App = () => {
             Home
           </button>
           <button
-            onClick={() => setActivePage('about')}
-            className="px-3 py-2 sm:px-4 sm:py-2 rounded-full transform transition-all duration-300 hover:scale-110 active:scale-95"
-            style={{ color: activePage === 'about' ? currentColors.secondary : currentColors.primary }}
-          >
-            About
-          </button>
-          <button
             onClick={() => setActivePage('events')}
             className="px-3 py-2 sm:px-4 sm:py-2 rounded-full transform transition-all duration-300 hover:scale-110 active:scale-95"
             style={{ color: activePage === 'events' ? currentColors.secondary : currentColors.primary }}
@@ -220,8 +213,6 @@ const App = () => {
             switch (activePage) {
               case 'home':
                 return <HomePage setActivePage={setActivePage} colors={currentColors} />;
-              case 'about':
-                return <AboutPage colors={currentColors} />;
               case 'events':
                 return <EventsPage setActivePage={setActivePage} setSelectedEvent={setSelectedEvent} colors={currentColors} />;
               case 'contact':
