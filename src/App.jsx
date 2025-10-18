@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { lightColors, darkColors, get_selected_uid } from './data';
 import HomePage from './Components/HomePage';
-import AboutPage from './Components/AboutPage';
 import EventDetailPage from './Components/EventsDetailPage';
 import RegistrationPage from './Components/RegistrationPage';
 import MessageBox from './Components/MessageBox';
@@ -12,6 +11,7 @@ import InstitutionalRegistrationPage from './Components/InstitutionRegistrationP
 import ThankYouPage from './Components/ThankYouPage';
 import RegistrationLookupPage from './Components/RegistrationLookupPage';
 import { set_selected_uid } from './data';
+import BackgroundOverlay from './Components/BackgroundOverlay';
 
 // App.jsx (Main App Component)
 const App = () => {
@@ -73,33 +73,35 @@ const App = () => {
     
 
       // Custom Styles
-    if (!document.getElementById('custom-styles')) {
-      const style = document.createElement('style');
-      style.id = 'custom-styles';
-      style.innerHTML = `
-        html, body {
-          margin: 0;
-          padding: 0;
-          font-family: 'Raleway', sans-serif;
-          width: 100%;
-          overflow-x: hidden;
-        }
-        h1, h2, h3, h4, h5, h6 {
-          font-family: 'Libre Baskerville', serif;
-        }
-        .tertiary-font {
-          font-family: 'Libre Baskerville', sans-serif;
-        }
-        .animate-fade-in { animation: fadeIn 1s ease-in-out; }
-        .animate-slide-up { animation: slideUp 1s ease-in-out; }
-        .animate-fade-in-delay-1 { animation: fadeIn 1s ease-in-out 0.5s forwards; opacity: 0; }
-        .animate-pulse-once { animation: pulseOnce 1.5s ease-in-out; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        @keyframes pulseOnce { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
-      `;
-      document.head.appendChild(style);
-    }
+      if (!document.getElementById('custom-styles')) {
+    const style = document.createElement('style');
+    style.id = 'custom-styles';
+    style.innerHTML = `
+      html, body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Raleway', sans-serif; /* body font */
+        width: 100%;
+        overflow-x: hidden;
+      }
+      h1, h2, h3, h4, h5, h6 {
+        font-family: 'Modo Bandani', serif; /* primary font */
+      }
+      .tertiary-font {
+        font-family: 'Libre Baskerville', serif; /* tertiary font */
+      }
+      .animate-fade-in { animation: fadeIn 1s ease-in-out; }
+      .animate-slide-up { animation: slideUp 1s ease-in-out; }
+      .animate-fade-in-delay-1 { animation: fadeIn 1s ease-in-out 0.5s forwards; opacity: 0; }
+      .animate-pulse-once { animation: pulseOnce 1.5s ease-in-out; }
+
+      @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+      @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+      @keyframes pulseOnce { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+    `;
+    document.head.appendChild(style);
+  }
+
     
       // Google Fonts Preconnect links
     if (!document.getElementById('google-fonts-preconnect1')) {
@@ -156,56 +158,63 @@ const App = () => {
   }
 
   return (
-    <div className="font-sans flex flex-col min-h-screen w-screen overflow-x-hidden">
-      {/* Navigation */}
-      <nav
-        className="sticky top-0 left-0 right-0 z-50 p-4 sm:p-6 flex justify-between backdrop-blur-sm transition-all duration-300"
-        style={{ color: currentColors.text, backgroundColor: currentColors.card}}
+   <div className="font-sans flex flex-col min-h-screen w-screen overflow-x-hidden relative">
+    <BackgroundOverlay isDarkTheme={isDarkTheme} />
+    
+  {/* Navigation */}
+  <nav
+    className="sticky top-0 left-0 right-0 z-50 p-2 sm:p-6 flex flex-wrap items-center backdrop-blur-sm transition-all duration-300"
+    style={{ color: currentColors.text, backgroundColor: currentColors.card }}
+  >
+    {/* Left buttons */}
+    <div className="flex flex-wrap gap-2 sm:gap-4 text-md sm:text-xl font-bold rounded-full p-1 sm:p-2 transition-all duration-300"
+         style={{ backgroundColor: currentColors.background, boxShadow: `0 4px 6px -1px ${currentColors.secondary}40` }}>
+      <button
+        onClick={() => setActivePage('home')}
+        className="px-2 sm:px-4 py-1 sm:py-2 rounded-full flex-shrink transform transition-all duration-300 hover:scale-105 active:scale-95"
+        style={{ color: activePage === 'home' ? currentColors.text : currentColors.secondary }}
       >
-        <div className="flex space-x-4 sm:space-x-8 text-md sm:text-xl font-bold rounded-full p-2 transition-all duration-300" style={{ backgroundColor: currentColors.background, boxShadow: `0 4px 6px -1px ${currentColors.secondary}40` }}>
-          <button
-            onClick={() => setActivePage('home')}
-            className="px-3 py-2 sm:px-4 sm:py-2 rounded-full transform transition-all duration-300 hover:scale-110 active:scale-95"
-            style={{ color: activePage === 'home' ? currentColors.text : currentColors.secondary }}
-          >
-            Home
-          </button>
-          <button
-            onClick={() => setActivePage('events')}
-            className="px-3 py-2 sm:px-4 sm:py-2 rounded-full transform transition-all duration-300 hover:scale-110 active:scale-95"
-            style={{ color: activePage === 'events' ? currentColors.text : currentColors.secondary }}
-          >
-            Events
-          </button>
-          <button
-            onClick={() => setActivePage('contact')}
-            className="px-3 py-2 sm:px-4 sm:py-2 rounded-full transform transition-all duration-300 hover:scale-110 active:scale-95"
-            style={{ color: activePage === 'contact' ? currentColors.text : currentColors.secondary }}
-          >
-            Contact
-          </button>
-        </div>
-        <div className="flex items-center space-x-2 sm:space-x-4">
-          <button
-            onClick={() => setActivePage('registration')}
-            className="px-4 py-2 text-sm sm:text-lg font-bold rounded-full shadow-lg transform transition-all duration-300 hover:scale-105 active:scale-95"
-            style={{
-              backgroundColor: currentColors.text,
-              color: currentColors.secondary,
-              border: `2px solid ${currentColors.text}`,
-            }}
-          >
-            Registrations
-          </button>
-          <button
-            onClick={() => setIsDarkTheme(!isDarkTheme)}
-            className="px-4 py-2 rounded-md outline-none focus:outline-none active:outline-none hover:outline-none ring-0 focus:ring-0 active:ring-0 hover:ring-0 text-xl sm:text-2xl font-['Chivo'] flex items-center justify-center"
-            aria-label={isDarkTheme ? "Switch to light mode" : "Switch to dark mode"}
-          >
-            {isDarkTheme ? <i className="fas fa-sun"></i> : <i className="fas fa-moon"></i>}
-          </button>
-        </div>
-      </nav>
+        Home
+      </button>
+      <button
+        onClick={() => setActivePage('events')}
+        className="px-2 sm:px-4 py-1 sm:py-2 rounded-full flex-shrink transform transition-all duration-300 hover:scale-105 active:scale-95"
+        style={{ color: activePage === 'events' ? currentColors.text : currentColors.secondary }}
+      >
+        Events
+      </button>
+      <button
+        onClick={() => setActivePage('contact')}
+        className="px-2 sm:px-4 py-1 sm:py-2 rounded-full flex-shrink transform transition-all duration-300 hover:scale-105 active:scale-95"
+        style={{ color: activePage === 'contact' ? currentColors.text : currentColors.secondary }}
+      >
+        Contact
+      </button>
+    </div>
+
+    {/* Right buttons */}
+    <div className="flex flex-wrap gap-2 sm:gap-4 mt-2 sm:mt-0 ml-auto">
+      <button
+        onClick={() => setActivePage('registration')}
+        className="px-3 sm:px-4 py-1 sm:py-2 text-sm sm:text-lg font-bold rounded-full shadow-lg flex-shrink transform transition-all duration-300 hover:scale-105 active:scale-95"
+        style={{
+          backgroundColor: currentColors.text,
+          color: currentColors.secondary,
+          border: `2px solid ${currentColors.text}`,
+        }}
+      >
+        Registrations
+      </button>
+      <button
+        onClick={() => setIsDarkTheme(!isDarkTheme)}
+        className="px-3 py-1 sm:px-4 sm:py-2 rounded-md outline-none focus:outline-none ring-0 text-xl sm:text-2xl font-['Chivo'] flex items-center justify-center flex-shrink"
+        aria-label={isDarkTheme ? "Switch to light mode" : "Switch to dark mode"}
+      >
+        {isDarkTheme ? <i className="fas fa-sun"></i> : <i className="fas fa-moon"></i>}
+      </button>
+    </div>
+  </nav>
+
 
       {/* Main Content Area */}
         <main className="flex-grow relative">

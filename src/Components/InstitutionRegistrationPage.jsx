@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { sendRegistrationDataInstitution } from "../services/RegistrationApiEndpoint";
 import { get_selected_uid, get_event_id } from "../data";
 import { set_fees } from "../data";
+import { lightColors } from "../data";
+import { darkColors } from "../data";
 
 const InstitutionalRegistrationPage = ({ setActivePage, setMessage, colors, initialData }) => {
   const [submitDisabled, setSubmitDisabled] = useState(false); 
@@ -110,7 +112,7 @@ const InstitutionalRegistrationPage = ({ setActivePage, setMessage, colors, init
 
   return (
     <div className="min-h-screen flex flex-col items-center p-4 sm:p-8 transition-colors duration-500" style={{ backgroundColor: colors.background, color: colors.text }}>
-      <div className="w-full max-w-xl md:max-w-3xl lg:max-w-4xl">
+      <div className="w-full max-w-full md:max-w-5xl lg:max-w-6xl px-2">
         <button
           onClick={() => setActivePage('registration')}
           className="mb-4 px-4 py-2 text-sm font-bold rounded-full shadow-md transform transition-all duration-300 hover:scale-105 active:scale-95"
@@ -192,7 +194,16 @@ const InstitutionalRegistrationPage = ({ setActivePage, setMessage, colors, init
                       </div>
                       <div className="space-y-4">
                         {team.participants.map((participant, participantIndex) => (
-                          <div key={participantIndex} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                          <div key={participantIndex} className="p-6 rounded-2xl shadow-lg grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+                              style={{
+                                  backgroundColor:
+                                    colors.background === lightColors.background
+                                      ? 'rgba(0, 0, 0, 0.05)' // black with 5% opacity for light background
+                                      : colors.background === darkColors.background
+                                      ? 'rgba(255, 255, 255, 0.05)' // white with 5% opacity for dark background
+                                      : colors.background // fallback: use the theme background as-is
+                                }}
+                            >
                             <input type="text" name="name" placeholder="Name" value={participant.name} onChange={(e) => handleTeamChange(formIndex, teamIndex, participantIndex, e)} className="p-2 rounded-lg border-2" style={{ borderColor: colors.secondary, color: colors.text, backgroundColor: colors.background }} required />
                             <input type="tel" name="phone" placeholder="Phone" value={participant.phone} onChange={(e) => handleTeamChange(formIndex, teamIndex, participantIndex, e)} className="p-2 rounded-lg border-2" style={{ borderColor: colors.secondary, color: colors.text, backgroundColor: colors.background }} required />
                             <input type="text" name="reg_no" placeholder="Reg. No." value={participant.reg_no} onChange={(e) => handleTeamChange(formIndex, teamIndex, participantIndex, e)} className="p-2 rounded-lg border-2" style={{ borderColor: colors.secondary, color: colors.text, backgroundColor: colors.background }} required />

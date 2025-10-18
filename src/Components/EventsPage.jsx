@@ -25,7 +25,7 @@ const EventsPage = ({ setActivePage, setSelectedEvent, colors }) => {
 			<button
 			  onClick={() => toggleExpand(event.category)}
 			  className="w-full flex justify-between items-center p-4 transition-colors duration-300"
-			  style={{ backgroundColor: expandedCategory === event.category ? colors.background : colors.background, color: expandedCategory === event.category ? colors.text : colors.tertiary }}
+			  style={{ backgroundColor: expandedCategory === event.category ? colors.background : colors.background, color: expandedCategory === event.category ? colors.text : colors.text }}
 			>
 			  <span className="text-lg sm:text-xl font-semibold" style={{ fontFamily: 'Libre Baskerville' }}>{event.category}</span>
 			  <i className={`fas fa-chevron-${expandedCategory === event.category ? 'up' : 'down'} transition-transform duration-300`}></i>
