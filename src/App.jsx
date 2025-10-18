@@ -195,7 +195,7 @@ const App = () => {
               border: `2px solid ${currentColors.text}`,
             }}
           >
-            Register
+            Registrations
           </button>
           <button
             onClick={() => setIsDarkTheme(!isDarkTheme)}
