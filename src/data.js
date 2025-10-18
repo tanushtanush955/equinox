@@ -3,8 +3,9 @@ export const lightColors = {
   secondary: '#91A8CE',
   tertiary: '#3C4367',
   background: '#fffbfa',
-  card: '#b5b5b5ff',
-  text: '#04315F',  
+  card: '#ecececff',
+  text: '#04315F',
+  
 };
 
 export const darkColors = {
