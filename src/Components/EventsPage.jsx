@@ -17,7 +17,7 @@ const EventsPage = ({ setActivePage, setSelectedEvent, colors }) => {
 	<div className="flex flex-col items-center p-4 sm:p-8 transition-colors duration-500" style={{ backgroundColor: colors.background }}>
 	  <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 sm:mb-8" style={{ fontFamily: 'Modo Badoni', color: colors.text }}>Upcoming Events</h1>
 	  <div className="w-full max-w-lg md:max-w-2xl rounded-xl overflow-hidden shadow-2xl" style={{backgroundColor: colors.card}}>
-		<div className="p-4" style={{ backgroundColor: colors.tertiary, color: colors.primary, fontFamily: 'Modo Badoni', fontWeight: 'bold' }}>
+		<div className="p-4" style={{ backgroundColor: colors.secondary, color: colors.text, fontFamily: 'Modo Badoni', fontWeight: 'bold' }}>
 		  EVENTS
 		</div>
 		{eventsData.map((event, index) => (
@@ -25,7 +25,7 @@ const EventsPage = ({ setActivePage, setSelectedEvent, colors }) => {
 			<button
 			  onClick={() => toggleExpand(event.category)}
 			  className="w-full flex justify-between items-center p-4 transition-colors duration-300"
-			  style={{ backgroundColor: expandedCategory === event.category ? colors.primary : colors.background, color: expandedCategory === event.category ? colors.text : colors.tertiary }}
+			  style={{ backgroundColor: expandedCategory === event.category ? colors.background : colors.background, color: expandedCategory === event.category ? colors.text : colors.tertiary }}
 			>
 			  <span className="text-lg sm:text-xl font-semibold" style={{ fontFamily: 'Libre Baskerville' }}>{event.category}</span>
 			  <i className={`fas fa-chevron-${expandedCategory === event.category ? 'up' : 'down'} transition-transform duration-300`}></i>
