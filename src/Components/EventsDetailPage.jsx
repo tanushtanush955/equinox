@@ -12,7 +12,7 @@ const EventDetailPage = ({ event, onBack, colors }) => {
         <div className="text-center mb-8">
           <h1
             className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 sm:mb-6"
-            style={{ fontFamily: 'Modo Badoni', color: colors.secondary }}
+            style={{ fontFamily: 'Modo Badoni', color: colors.text }}
           >
             {event.name}
           </h1>
@@ -28,25 +28,25 @@ const EventDetailPage = ({ event, onBack, colors }) => {
         <div className="text-left w-full max-w-3xl mx-auto">
           <ul className="space-y-4">
             <li className="text-base sm:text-lg" style={{ fontFamily: 'Raleway' }}>
-              <span className="font-semibold" style={{ color: colors.secondary }}>Venue:</span> {event.venue}
+              <span className="font-semibold" style={{ color: colors.tertiary }}>Venue:</span> {event.venue}
             </li>
             <li className="text-base sm:text-lg" style={{ fontFamily: 'Raleway' }}>
-              <span className="font-semibold" style={{ color: colors.secondary }}>Timings:</span> {event.timings}
+              <span className="font-semibold" style={{ color: colors.tertiary }}>Timings:</span> {event.timings}
             </li>
             <li className="text-base sm:text-lg" style={{ fontFamily: 'Raleway' }}>
-              <span className="font-semibold" style={{ color: colors.secondary }}>Participants per team:</span> {event.num_participants}
+              <span className="font-semibold" style={{ color: colors.tertiary }}>Participants per team:</span> {event.num_participants}
             </li>
             <li className="text-base sm:text-lg" style={{ fontFamily: 'Raleway' }}>
-              <span className="font-semibold" style={{ color: colors.secondary }}>Max teams per institution:</span> {event.num_teams}
+              <span className="font-semibold" style={{ color: colors.tertiary }}>Max teams per institution:</span> {event.num_teams}
             </li>
             <li className="text-base sm:text-lg" style={{ fontFamily: 'Raleway' }}>
-              <span className="font-semibold" style={{ color: colors.secondary }}>Fees:</span> {event.fees}
+              <span className="font-semibold" style={{ color: colors.tertiary }}>Fees:</span> {event.fees}
             </li>
             <li className="text-base sm:text-lg" style={{ fontFamily: 'Raleway' }}>
-              <span className="font-semibold" style={{ color: colors.secondary }}>Contact No:</span> {event.contact_no}
+              <span className="font-semibold" style={{ color: colors.tertiary }}>Contact No:</span> {event.contact_no}
             </li>
             <li className="text-base sm:text-lg" style={{ fontFamily: 'Raleway' }}>
-              <span className="font-semibold" style={{ color: colors.secondary }}>Rules:</span>
+              <span className="font-semibold" style={{ color: colors.tertiary }}>Rules:</span>
               <ul className="list-disc list-inside ml-4 space-y-1">
                 {event.rules.map((rule, index) => <li key={index} style={{ fontFamily: 'Raleway' }}>{rule}</li>)}
               </ul>
@@ -58,7 +58,7 @@ const EventDetailPage = ({ event, onBack, colors }) => {
             <button
               onClick={onBack}
               className="px-6 py-3 text-md font-bold rounded-full shadow-lg transform transition-all duration-300 hover:scale-105 active:scale-95"
-              style={{ backgroundColor: colors.primary, color: colors.secondary, border: `2px solid ${colors.secondary}` }}
+              style={{ backgroundColor: colors.secondary, color: colors.text, border: `2px solid ${colors.secondary}` }}
             >
               Back to Events
             </button>

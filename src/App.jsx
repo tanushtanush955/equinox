@@ -160,27 +160,27 @@ const App = () => {
       {/* Navigation */}
       <nav
         className="sticky top-0 left-0 right-0 z-50 p-4 sm:p-6 flex justify-between backdrop-blur-sm transition-all duration-300"
-        style={{ color: currentColors.secondary, backgroundColor: isDarkTheme ? 'rgba(0, 17, 34, 0.5)' : 'rgba(255, 251, 250, 0.5)' }}
+        style={{ color: currentColors.text, backgroundColor: currentColors.card}}
       >
-        <div className="flex space-x-4 sm:space-x-8 text-md sm:text-xl font-bold rounded-full p-2 transition-all duration-300" style={{ backgroundColor: currentColors.tertiary, boxShadow: `0 4px 6px -1px ${currentColors.secondary}40` }}>
+        <div className="flex space-x-4 sm:space-x-8 text-md sm:text-xl font-bold rounded-full p-2 transition-all duration-300" style={{ backgroundColor: currentColors.background, boxShadow: `0 4px 6px -1px ${currentColors.secondary}40` }}>
           <button
             onClick={() => setActivePage('home')}
             className="px-3 py-2 sm:px-4 sm:py-2 rounded-full transform transition-all duration-300 hover:scale-110 active:scale-95"
-            style={{ color: activePage === 'home' ? currentColors.secondary : currentColors.primary }}
+            style={{ color: activePage === 'home' ? currentColors.text : currentColors.secondary }}
           >
             Home
           </button>
           <button
             onClick={() => setActivePage('events')}
             className="px-3 py-2 sm:px-4 sm:py-2 rounded-full transform transition-all duration-300 hover:scale-110 active:scale-95"
-            style={{ color: activePage === 'events' ? currentColors.secondary : currentColors.primary }}
+            style={{ color: activePage === 'events' ? currentColors.text : currentColors.secondary }}
           >
             Events
           </button>
           <button
             onClick={() => setActivePage('contact')}
             className="px-3 py-2 sm:px-4 sm:py-2 rounded-full transform transition-all duration-300 hover:scale-110 active:scale-95"
-            style={{ color: activePage === 'contact' ? currentColors.secondary : currentColors.primary }}
+            style={{ color: activePage === 'contact' ? currentColors.text : currentColors.secondary }}
           >
             Contact
           </button>
@@ -190,9 +190,9 @@ const App = () => {
             onClick={() => setActivePage('registration')}
             className="px-4 py-2 text-sm sm:text-lg font-bold rounded-full shadow-lg transform transition-all duration-300 hover:scale-105 active:scale-95"
             style={{
-              backgroundColor: currentColors.primary,
+              backgroundColor: currentColors.text,
               color: currentColors.secondary,
-              border: `2px solid ${currentColors.secondary}`,
+              border: `2px solid ${currentColors.text}`,
             }}
           >
             Register
@@ -238,7 +238,7 @@ const App = () => {
       {/* Footer with Instagram icon */}
       <footer
         className="p-4 text-center transition-colors duration-500"
-        style={{ backgroundColor: currentColors.tertiary, color: currentColors.secondary }}
+        style={{ backgroundColor: currentColors.card, color: currentColors.tertiary }}
       >
         <div className="flex items-center justify-between px-4">
           <a href="https://www.instagram.com/equinox_sjpuc?igsh=MTBya3EweHZlM3Qx" target="_blank" rel="noopener noreferrer" className="text-3xl transition-transform transform hover:scale-125">

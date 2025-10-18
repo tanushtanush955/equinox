@@ -114,14 +114,14 @@ const InstitutionalRegistrationPage = ({ setActivePage, setMessage, colors, init
         <button
           onClick={() => setActivePage('registration')}
           className="mb-4 px-4 py-2 text-sm font-bold rounded-full shadow-md transform transition-all duration-300 hover:scale-105 active:scale-95"
-          style={{ backgroundColor: colors.primary, color: colors.secondary }}
+          style={{ backgroundColor: colors.secondary, color: colors.text}}
         >
           &larr; Go Back
         </button>
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-8" style={{ fontFamily: 'Modo Badoni', color: colors.secondary }}>Institutional Registration</h1>
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-8" style={{ fontFamily: 'Modo Badoni', color: colors.text }}>Institutional Registration</h1>
         
         <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="p-6 sm:p-8 rounded-xl shadow-lg" style={{ backgroundColor: colors.card, color: colors.text, border: `2px solid ${colors.primary}` }}>
+          <div className="p-6 sm:p-8 rounded-xl shadow-lg" style={{ backgroundColor: colors.background, color: colors.text, border: `2px solid ${colors.tertiary}` }}>
             <h2 className="text-xl sm:text-2xl font-semibold mb-4" style={{ fontFamily: 'Modo Badoni' }}>Institution Details</h2>
             <div className="flex flex-col">
               <label className="text-sm sm:text-base font-medium mb-1" style={{ fontFamily: 'Raleway' }}>School/College Name</label>
@@ -131,15 +131,15 @@ const InstitutionalRegistrationPage = ({ setActivePage, setMessage, colors, init
                 value={schoolName}
                 onChange={(e) => setSchoolName(e.target.value)}
                 className="p-2 sm:p-3 rounded-lg border-2"
-                style={{ borderColor: colors.secondary, color: colors.text, backgroundColor: colors.tertiary }}
+                style={{ borderColor: colors.secondary, color: colors.text, backgroundColor: colors.background }}
                 required
               />
             </div>
             <h3 className="text-sm sm:text-base font-medium mt-4 mb-2" style={{ fontFamily: 'Raleway' }}>Head Delegate Details</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              <input type="text" name="name" placeholder="Name" value={headDelegate.name} onChange={handleHeadDelegateChange} className="p-2 rounded-lg border-2" style={{ borderColor: colors.secondary, color: colors.text, backgroundColor: colors.tertiary }} required />
-              <input type="tel" name="phone" placeholder="Phone" value={headDelegate.phone} onChange={handleHeadDelegateChange} className="p-2 rounded-lg border-2" style={{ borderColor: colors.secondary, color: colors.text, backgroundColor: colors.tertiary }} required />
-              <input type="email" name="email" placeholder="Email" value={headDelegate.email} onChange={handleHeadDelegateChange} className="p-2 rounded-lg border-2" style={{ borderColor: colors.secondary, color: colors.text, backgroundColor: colors.tertiary }} required />
+              <input type="text" name="name" placeholder="Name" value={headDelegate.name} onChange={handleHeadDelegateChange} className="p-2 rounded-lg border-2" style={{ borderColor: colors.secondary, color: colors.text, backgroundColor: colors.background }} required />
+              <input type="tel" name="phone" placeholder="Phone" value={headDelegate.phone} onChange={handleHeadDelegateChange} className="p-2 rounded-lg border-2" style={{ borderColor: colors.secondary, color: colors.text, backgroundColor: colors.background }} required />
+              <input type="email" name="email" placeholder="Email" value={headDelegate.email} onChange={handleHeadDelegateChange} className="p-2 rounded-lg border-2" style={{ borderColor: colors.secondary, color: colors.text, backgroundColor: colors.background }} required />
             </div>
             <div className="flex flex-col mt-4">
               <h3 className="text-sm sm:text-base font-medium mb-2" style={{ fontFamily: 'Raleway' }}>Select Events</h3>
@@ -174,10 +174,10 @@ const InstitutionalRegistrationPage = ({ setActivePage, setMessage, colors, init
           {registrationForms.length > 0 && (
             <div className="space-y-6">
               {registrationForms.map((form, formIndex) => (
-                <div key={formIndex} className="p-6 sm:p-8 rounded-xl shadow-lg" style={{ backgroundColor: colors.card, color: colors.text, border: `2px solid ${colors.primary}` }}>
+                <div key={formIndex} className="p-6 sm:p-8 rounded-xl shadow-lg" style={{ backgroundColor: colors.background, color: colors.text, border: `2px solid ${colors.tertiary}` }}>
                   <h2 className="text-xl sm:text-2xl font-semibold mb-4" style={{ fontFamily: 'Modo Badoni' }}>{allEvents.find(e => e.event_uid === form.event_uid)?.name || 'Unknown Event'}</h2>
                   {form.teams.map((team, teamIndex) => (
-                    <div key={teamIndex} className="mb-6 p-4 rounded-lg" style={{ backgroundColor: colors.tertiary, color: colors.secondary, border: `2px dashed ${colors.secondary}` }}>
+                    <div key={teamIndex} className="mb-6 p-4 rounded-lg" style={{ backgroundColor: colors.background, color: colors.text, border: `2px dashed ${colors.secondary}` }}>
                       <div className="flex justify-between items-center mb-2">
                         <h3 className="text-lg font-semibold" style={{ fontFamily: 'Libre Baskerville' }}>{team.teamName}</h3>
                         {form.teams.length > 1 && (
@@ -193,9 +193,9 @@ const InstitutionalRegistrationPage = ({ setActivePage, setMessage, colors, init
                       <div className="space-y-4">
                         {team.participants.map((participant, participantIndex) => (
                           <div key={participantIndex} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                            <input type="text" name="name" placeholder="Name" value={participant.name} onChange={(e) => handleTeamChange(formIndex, teamIndex, participantIndex, e)} className="p-2 rounded-lg border-2" style={{ borderColor: colors.secondary, color: colors.text, backgroundColor: colors.card }} required />
-                            <input type="tel" name="phone" placeholder="Phone" value={participant.phone} onChange={(e) => handleTeamChange(formIndex, teamIndex, participantIndex, e)} className="p-2 rounded-lg border-2" style={{ borderColor: colors.secondary, color: colors.text, backgroundColor: colors.card }} required />
-                            <input type="text" name="reg_no" placeholder="Reg. No." value={participant.reg_no} onChange={(e) => handleTeamChange(formIndex, teamIndex, participantIndex, e)} className="p-2 rounded-lg border-2" style={{ borderColor: colors.secondary, color: colors.text, backgroundColor: colors.card }} required />
+                            <input type="text" name="name" placeholder="Name" value={participant.name} onChange={(e) => handleTeamChange(formIndex, teamIndex, participantIndex, e)} className="p-2 rounded-lg border-2" style={{ borderColor: colors.secondary, color: colors.text, backgroundColor: colors.background }} required />
+                            <input type="tel" name="phone" placeholder="Phone" value={participant.phone} onChange={(e) => handleTeamChange(formIndex, teamIndex, participantIndex, e)} className="p-2 rounded-lg border-2" style={{ borderColor: colors.secondary, color: colors.text, backgroundColor: colors.background }} required />
+                            <input type="text" name="reg_no" placeholder="Reg. No." value={participant.reg_no} onChange={(e) => handleTeamChange(formIndex, teamIndex, participantIndex, e)} className="p-2 rounded-lg border-2" style={{ borderColor: colors.secondary, color: colors.text, backgroundColor: colors.background }} required />
                           </div>
                         ))}
                       </div>
@@ -219,8 +219,8 @@ const InstitutionalRegistrationPage = ({ setActivePage, setMessage, colors, init
                   type="submit"
                   className="px-8 py-4 text-lg font-bold rounded-full shadow-lg transform transition-all duration-300 hover:scale-105 active:scale-95 disabled:bg-gray-400 disabled:cursor-not-allowed"
                   style={{
-                    backgroundColor: colors.primary,
-                    color: colors.secondary,
+                    backgroundColor: colors.secondary,
+                    color: colors.text,
                     border: `2px solid ${colors.secondary}`,
                   }}
                 >

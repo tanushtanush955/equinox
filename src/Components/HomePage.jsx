@@ -20,13 +20,13 @@ const HomePage = ({ setActivePage, colors }) => (
       <div className="bg-black bg-opacity-5 p-6 rounded-2xl shadow-lg flex flex-col items-end text-right max-w-xl space-y-3">
         <h1
           className="text-5xl sm:text-6xl md:text-7xl font-extrabold"
-          style={{ fontFamily: "Modo Badoni", color: colors.secondary }}
+          style={{ fontFamily: "Modo Badoni", color: colors.text }}
         >
           EQUINOX
         </h1>
         <h2
           className="text-lg sm:text-xl md:text-2xl tracking-widest font-thin"
-          style={{ fontFamily: "Libre Baskerville", color: colors.primary }}
+          style={{ fontFamily: "Libre Baskerville", color: colors.secondary }}
         >
           2025
         </h2>
@@ -47,14 +47,14 @@ const HomePage = ({ setActivePage, colors }) => (
     </div>
 
     {/* Register button centered */}
-    <div className="flex justify-center w-full mt-6 px-4 sm:px-6">
+    <div className="flex justify-center w-full mt-6 px-4 sm:px-6 mb-5">
       <button
         onClick={() => setActivePage("registration")}
         className="px-6 py-3 text-base sm:text-lg font-bold rounded-full shadow-md transform transition-all duration-300 hover:scale-105 active:scale-95"
         style={{
-          backgroundColor: colors.primary,
+          backgroundColor: colors.text,
           color: colors.secondary,
-          border: `2px solid ${colors.secondary}`,
+          border: `2px solid ${colors.text}`,
         }}
       >
         Register Now

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import MessageBox from './MessageBox';
 import { set_selected_uid } from '../data';
 import { lookupRegistration } from '../services/RegistrationApiEndpoint';
@@ -32,8 +32,8 @@ const RegistrationLookupPage = ({ setActivePage, setRegistrationData, colors }) 
 
   return (
 	<div className="min-h-screen flex flex-col items-center justify-center p-4 sm:p-8" style={{ backgroundColor: colors.background, color: colors.text }}>
-	  <div className="bg-white p-6 sm:p-8 rounded-xl shadow-lg" style={{ backgroundColor: colors.card, color: colors.text, border: `2px solid ${colors.primary}` }}>
-		<h1 className="text-3xl sm:text-4xl font-bold text-center mb-6" style={{ fontFamily: 'Modo Badoni', color: colors.secondary }}>Find Your Registration</h1>
+	  <div className="bg-white p-6 sm:p-8 rounded-xl shadow-lg" style={{ backgroundColor: colors.background, color: colors.text, border: `2px solid ${colors.tertiary}` }}>
+		<h1 className="text-3xl sm:text-4xl font-bold text-center mb-6" style={{ fontFamily: 'Modo Badoni', color: colors.text}}>Find Your Registration</h1>
 		<p className="mb-4 text-center" style={{ fontFamily: 'Raleway' }}>Enter your unique registration ID below.</p>
 		<div className="flex flex-col space-y-4">
 		  <input
@@ -42,12 +42,12 @@ const RegistrationLookupPage = ({ setActivePage, setRegistrationData, colors }) 
 			onChange={(e) => setUid(e.target.value)}
 			placeholder="Enter Registration ID"
 			className="p-3 rounded-lg border-2"
-			style={{ borderColor: colors.secondary, color: colors.text, backgroundColor: colors.tertiary }}
+			style={{ borderColor: colors.secondary, color: colors.text, backgroundColor: colors.background }}
 		  />
 		  <button
 			onClick={handleLookup}
 			className="px-6 py-3 text-lg font-bold rounded-full shadow-lg transform transition-all duration-300 hover:scale-105"
-			style={{ backgroundColor: colors.secondary, color: colors.primary }}
+			style={{ backgroundColor: colors.secondary, color: colors.text }}
 		  >
 			Load Registration
 		  </button>

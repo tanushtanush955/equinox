@@ -62,9 +62,9 @@ const IndividualRegistrationPage = ({ setActivePage, setMessage, colors, initial
   return (
     <div className="min-h-screen flex flex-col items-center p-4 sm:p-8 transition-colors duration-500" style={{ backgroundColor: colors.background, color: colors.text }}>
       <div className="w-full max-w-xl md:max-w-3xl lg:max-w-4xl">
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-8" style={{ fontFamily: 'Modo Badoni', color: colors.secondary }}>Individual Registration</h1>
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-8" style={{ fontFamily: 'Modo Badoni', color: colors.text }}>Individual Registration</h1>
         
-        <div className="p-6 sm:p-8 rounded-xl shadow-lg mb-6" style={{ backgroundColor: colors.card, color: colors.text, border: `2px solid ${colors.primary}` }}>
+        <div className="p-6 sm:p-8 rounded-xl shadow-lg mb-6" style={{ backgroundColor: colors.background, color: colors.text, border: `2px solid ${colors.secondary}` }}>
           <h2 className="text-xl sm:text-2xl font-semibold mb-4" style={{ fontFamily: 'Modo Badoni' }}>Choose Your Event</h2>
           <div className="flex flex-col">
             <label className="text-sm sm:text-base font-medium mb-1" style={{ fontFamily: 'Raleway' }}>Event</label>
@@ -73,7 +73,7 @@ const IndividualRegistrationPage = ({ setActivePage, setMessage, colors, initial
               value={selectedEvent}
               onChange={handleEventChange}
               className="p-2 sm:p-3 rounded-lg border-2"
-              style={{ borderColor: colors.secondary, color: colors.text, backgroundColor: colors.tertiary }}
+              style={{ borderColor: colors.secondary, color: colors.text, backgroundColor: colors.background }}
             >
               <option value="">Select an Event</option>
               {allEvents.map((event, index) => (
@@ -86,7 +86,7 @@ const IndividualRegistrationPage = ({ setActivePage, setMessage, colors, initial
         {selectedEvent && (
           <form onSubmit={handleSubmit} className="space-y-6">
             {participants.map((participant, index) => (
-              <div key={index} className="p-6 sm:p-8 rounded-xl shadow-lg" style={{ backgroundColor: colors.card, color: colors.text, border: `2px solid ${colors.primary}` }}>
+              <div key={index} className="p-6 sm:p-8 rounded-xl shadow-lg" style={{ backgroundColor: colors.background, color: colors.text, border: `2px solid ${colors.secondary}` }}>
                 <h2 className="text-xl sm:text-2xl font-semibold mb-4" style={{ fontFamily: 'Modo Badoni' }}>Participant {index + 1}</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                   <div className="flex flex-col">
@@ -97,7 +97,7 @@ const IndividualRegistrationPage = ({ setActivePage, setMessage, colors, initial
                       value={participant.name}
                       onChange={(e) => handleInputChange(index, e)}
                       className="p-2 sm:p-3 rounded-lg border-2"
-                      style={{ borderColor: colors.secondary, color: colors.text, backgroundColor: colors.tertiary }}
+                      style={{ borderColor: colors.secondary, color: colors.text, backgroundColor: colors.background}}
                       required
                     />
                   </div>
@@ -109,7 +109,7 @@ const IndividualRegistrationPage = ({ setActivePage, setMessage, colors, initial
                       value={participant.phone}
                       onChange={(e) => handleInputChange(index, e)}
                       className="p-2 sm:p-3 rounded-lg border-2"
-                      style={{ borderColor: colors.secondary, color: colors.text, backgroundColor: colors.tertiary }}
+                      style={{ borderColor: colors.secondary, color: colors.text, backgroundColor: colors.background }}
                       required
                     />
                   </div>
@@ -121,7 +121,7 @@ const IndividualRegistrationPage = ({ setActivePage, setMessage, colors, initial
                       value={participant.email}
                       onChange={(e) => handleInputChange(index, e)}
                       className="p-2 sm:p-3 rounded-lg border-2"
-                      style={{ borderColor: colors.secondary, color: colors.text, backgroundColor: colors.tertiary }}
+                      style={{ borderColor: colors.secondary, color: colors.text, backgroundColor: colors.background }}
                       required
                     />
                   </div>
@@ -134,8 +134,8 @@ const IndividualRegistrationPage = ({ setActivePage, setMessage, colors, initial
                 type="submit"
                 className="px-8 py-4 text-lg font-bold rounded-full shadow-lg transform transition-all duration-300 hover:scale-105 active:scale-95 disabled:bg-gray-400 disabled:cursor-not-allowed"
                 style={{
-                  backgroundColor: colors.primary,
-                  color: colors.secondary,
+                  backgroundColor: colors.secondary,
+                  color: colors.text,
                   border: `2px solid ${colors.secondary}`,
                 }}
               >

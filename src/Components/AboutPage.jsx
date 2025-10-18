@@ -2,7 +2,7 @@ const AboutPage = ({ colors }) => (
   <div className="flex flex-col items-start text-left space-y-3 transition-colors duration-500" style={{ color: colors.text }}>
     <h1
       className="text-3xl sm:text-4xl md:text-5xl font-bold"
-      style={{ fontFamily: "Modo Badoni", color: colors.secondary }}
+      style={{ fontFamily: "Modo Badoni", color: colors.text }}
     >
       About EQUINOX
     </h1>
